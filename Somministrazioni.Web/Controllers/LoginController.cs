@@ -1,6 +1,7 @@
 ﻿using log4net;
 using Somministrazioni.BusinessFacade;
 using Somministrazioni.Common.Constants;
+using Somministrazioni.Web.Models.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace Somministrazioni.Web.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(LoginModel loginModel)
         {
-            return View();
+            return View(loginModel);
         }
 
         [HttpPost]
@@ -33,7 +34,7 @@ namespace Somministrazioni.Web.Controllers
 
                 if (authenticationRes == AUTHENTICATION_FALSE)
                 {
-                    return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName);
+                    return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName, new LoginModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
                 }
                 PutInSession(this, idOperatore);
 
