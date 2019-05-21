@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Somministrazioni.Web.Models.Login.LoginModel
+@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/LoginLayout.cshtml";
 }
@@ -11,6 +12,9 @@
     <label>Enter the Password</label>
     <input type="password" name="password" />
     <input type="submit" value="Login" name="submit" class="submit" />
+    <div id="infoPanel">
+        <p>@Model.Message</p>
+    </div>
 }
 
 
