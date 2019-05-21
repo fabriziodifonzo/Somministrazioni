@@ -64,7 +64,6 @@
     <Compile Include="DataService\User\IUserDataService.cs" />
     <Compile Include="DataService\User\UserDataService.cs" />
     <Compile Include="DataService\User\UserDataServiceFactory.cs" />
-    <Compile Include="Interceptors\LoggedEFInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

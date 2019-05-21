@@ -1,4 +1,4 @@
-﻿using Sommnistrazioni.Data.Interceptors;
+﻿using Somministrazioni.Web.Interceptors;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure.Interception;

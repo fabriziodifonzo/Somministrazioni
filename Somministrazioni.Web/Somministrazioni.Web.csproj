@@ -55,6 +55,12 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -151,6 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interceptors\LoggedEFInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,10 +227,6 @@
     <ProjectReference Include="..\Somministrazioni.Common\Somministrazioni.Common.csproj">
       <Project>{79ba3d00-4a8f-4494-930d-0e8048775825}</Project>
       <Name>Somministrazioni.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sommnistrazioni.Data\Sommnistrazioni.Data.csproj">
-      <Project>{9962D0BA-FD2B-43AA-BCBC-472B570167EE}</Project>
-      <Name>Sommnistrazioni.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

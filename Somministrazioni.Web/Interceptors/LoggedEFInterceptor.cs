@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sommnistrazioni.Data.Interceptors
+namespace Somministrazioni.Web.Interceptors
 {
     /// <summary>
     /// This class is an interceptor for Entity framework. It allows to EF to log query in a certain appender.
