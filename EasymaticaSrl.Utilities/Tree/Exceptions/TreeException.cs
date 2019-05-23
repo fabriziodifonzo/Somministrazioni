@@ -47,9 +47,12 @@ namespace EasymaticaSrl.Utilities.Tree.Exceptions
             base.GetObjectData(info, context);
         }
 
-        public int ErrorCode()
+        public int ErrorCode
         {
-            return _errorCode;
+            get
+            {
+                return _errorCode;
+            }
         }
 
         readonly int _errorCode = -1;

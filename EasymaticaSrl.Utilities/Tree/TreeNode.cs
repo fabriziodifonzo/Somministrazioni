@@ -1,4 +1,5 @@
 ﻿using EasymaticaSrl.Utilities.Tree.Constants;
+using EasymaticaSrl.Utilities.Tree.Enums;
 using EasymaticaSrl.Utilities.Tree.Exceptions;
 using Somministrazioni.Common.Constants;
 using System;
@@ -17,52 +18,59 @@ namespace EasymaticaSrl.Utilities.Tree
             return new TreeNode();
         }
 
+        void ChangeStatus(Enums.NodeStatus nodeStatus)
+        {
+            _nodeStatus = nodeStatus;
+        }
 
         public void AddLeaf(ITreeNode treeNode)
         {
             CheckAddChildParameters(treeNode);
-            CheckIsLeaf(treeNode);
+            CheckIsRootAndLeaf(treeNode);
 
-            treeNode.AddParent(this);
             _listChildren.Add(treeNode);
+            ((TreeNode)treeNode).ChangeStatus(Enums.NodeStatus.INSERTED);
+            treeNode.Attach(this);
+            ((TreeNode)treeNode).ChangeStatus(Enums.NodeStatus.ATTACHED);
             treeNode.SetLevel(this.Level() + 1);
-            treeNode.SetIndex(this._listChildren.Count);
-
-            if (_isLeaf)
-            {
-                _isLeaf = false;
-            }
+            treeNode.SetNodeNumber(this._listChildren.Count);
         }
 
-        public void AddParent(ITreeNode treeNode)
+        public void Attach(ITreeNode treeNodeToAttach)
         {
-            CheckAddParentParameters(treeNode);
-            CheckNodeHasNoParent(treeNode);
+            CheckAttachParameters(treeNodeToAttach);
+            CheckNodeStatusInserted(this);
+            CheckAttachToNodeAbove(treeNodeToAttach);
 
-            _listParent.Add(treeNode);
+            _listParent.Add(treeNodeToAttach);            
         }
 
         public void DeleteLeaf(int index)
         {
             CheckIndexOk(index);
             CheckNodeIfLeaf(index);
-
             var child = _listChildren.ElementAt(index - 1);
+            child.SetNodeNumber(1);
+            CheckIsLeaf(child);
+
             child.Detach();
             child.SetLevel(1);
             _listChildren.RemoveAt(index - 1);
-           
-            int newIndex = 1;
-            foreach(var treeNode in _listChildren)
-            {
-                treeNode.SetIndex(newIndex++);
-            }
+            ((TreeNode)child).ChangeStatus(Enums.NodeStatus.ROOT);
 
-            _isLeaf |= !_listChildren.Any();
+            int newIndex = 1;
+            foreach (var treeNode in _listChildren)
+            {
+                treeNode.SetNodeNumber(newIndex);
+                newIndex++;
+            }
         }
 
         public void Detach()
         {
+            CheckNodeStatusAttached();
+            _nodeStatus = Enums.NodeStatus.INSERTED;
+
             _listParent.Clear();
         }
 
@@ -73,17 +81,17 @@ namespace EasymaticaSrl.Utilities.Tree
 
         public bool IsLeaf()
         {
-            return _isLeaf;
+            return _listChildren.Count == 0;
         }
 
         public int Level()
         {
-           return _level;
+            return _level;
         }
 
-        public int Index()
+        public int NodeNumber()
         {
-            return _index;
+            return _nodeNumber;
         }
 
         public int NumbOfChildren()
@@ -92,7 +100,7 @@ namespace EasymaticaSrl.Utilities.Tree
         }
 
         public int Depth()
-        {           
+        {
             if (IsLeaf())
             {
                 return 1;
@@ -102,7 +110,7 @@ namespace EasymaticaSrl.Utilities.Tree
                 var dept = 0;
                 foreach (var treeNode in Children())
                 {
-                    dept  = Math.Max(dept, treeNode.Depth());
+                    dept = Math.Max(dept, treeNode.Depth());
                 }
                 return dept + 1;
             }
@@ -114,9 +122,9 @@ namespace EasymaticaSrl.Utilities.Tree
             _level = level;
         }
 
-        public void SetIndex(int index)
+        public void SetNodeNumber(int index)
         {
-            _index = index;
+            _nodeNumber = index;
         }
 
         public IList<ITreeNode> Children()
@@ -129,11 +137,16 @@ namespace EasymaticaSrl.Utilities.Tree
             return _listParent.ToImmutableList();
         }
 
+        public NodeStatus NodeStatus()
+        {
+            return _nodeStatus; 
+        }
+
         readonly IList<ITreeNode> _listChildren = new List<ITreeNode>();
         readonly IList<ITreeNode> _listParent = new List<ITreeNode>();
         int _level = 1;
-        int _index = 1;
-        bool _isLeaf = true;
+        int _nodeNumber = 1;
+        NodeStatus _nodeStatus = Enums.NodeStatus.ROOT;
 
         protected TreeNode()
         {
@@ -149,15 +162,15 @@ namespace EasymaticaSrl.Utilities.Tree
 
         void CheckIsLeaf(ITreeNode treeNode)
         {
-            Contract.Contract.Precondiction(treeNode != null, Constants.Constants.ERRMSG_TREANODECANNOTBENULL);
+            Contract.Contract.Precondiction(treeNode != null, Constants.TreeConstants.ERRMSG_TREANODECANNOTBENULL);
 
             if (!treeNode.IsLeaf())
             {
-                throw new TreeException(Constants.Constants.ERRCODE_LEAFNODENEEDED, Constants.Constants.ERRMSG_LEAFNODENEEDED);
+                throw new TreeException(Constants.TreeConstants.ERRCODE_LEAFNODENEEDED, Constants.TreeConstants.ERRMSG_LEAFNODENEEDED);
             }
         }
 
-        void CheckAddParentParameters(ITreeNode treeNode)
+        void CheckAttachParameters(ITreeNode treeNode)
         {
             if (treeNode == null)
             {
@@ -165,30 +178,73 @@ namespace EasymaticaSrl.Utilities.Tree
             }
         }
 
-        void CheckNodeHasNoParent(ITreeNode treeNode)
+        void CheckAttachToNodeAbove(ITreeNode treeNodeToAttach)
         {
-            Contract.Contract.Precondiction(treeNode != null, Constants.Constants.ERRMSG_TREANODECANNOTBENULL);
+            Contract.Contract.Precondiction(treeNodeToAttach != null, Constants.TreeConstants.ERRMSG_TREANODECANNOTBENULL);
 
-            if (treeNode.HasParent())
+            if (_listChildren.Contains(treeNodeToAttach))
             {
-                throw new TreeException(Constants.Constants.ERRCODE_TREEALREADYHASAPARENT, Constants.Constants.ERRMSG_TREEALREADYHASAPARENT);
+                throw new TreeException(TreeConstants.ERRCODE_ONELEVELABOVEISNEEDEDFORATTACH, TreeConstants.ERRMSG_ONELEVELABOVEISNEEDEDFORATTACH);
+            }  
+        }
+
+        void CheckNodeStatusInserted(ITreeNode treeNodeToAttach)
+        {
+            Contract.Contract.Precondiction(treeNodeToAttach != null, Constants.TreeConstants.ERRMSG_TREANODECANNOTBENULL);
+
+            if (treeNodeToAttach.NodeStatus() != Enums.NodeStatus.INSERTED)
+            {
+                throw new TreeException(TreeConstants.ERRCODE_INSERTEDNODENEEDED, TreeConstants.ERRMSG_INSERTEDNODENEEDED);
             }
         }
 
+        void CheckNodeStatusAttached()
+        {
+            if (NodeStatus() != Enums.NodeStatus.ATTACHED)
+            {
+                throw new TreeException(TreeConstants.ERRCODE_ATTACHEDNODENEEDED, TreeConstants.ERRMSG_ATTACHEDNODENEEDED);
+            }
+        }
+
+
         void CheckIndexOk(int index)
         {
-            if ((index < 0) || (index > NumbOfChildren()))
+            if ((index -1 < 0) || (index - 1 >= NumbOfChildren()))
             {
-                throw new TreeException(Constants.Constants.ERRCODE_WROONGINDEX, Constants.Constants.ERRMSG_WROONGINDEX);
+                throw new TreeException(Constants.TreeConstants.ERRCODE_WROONGINDEX, Constants.TreeConstants.ERRMSG_WROONGINDEX);
             }
         }
 
         void CheckNodeIfLeaf(int index)
         {
-            if (!_listChildren.ElementAt(index - 1).IsLeaf())
+            if (!_listChildren.ElementAt(index-1).IsLeaf())
             {
-                throw new TreeException(Constants.Constants.ERRCODE_LEAFNODENEEDED, Constants.Constants.ERRMSG_LEAFNODENEEDED);
+                throw new TreeException(Constants.TreeConstants.ERRCODE_LEAFNODENEEDED, Constants.TreeConstants.ERRMSG_LEAFNODENEEDED);
             }
+        }
+
+        void CheckIsRootAndLeaf(ITreeNode treeNode)
+        {       
+            if (!(treeNode.IsLeaf() && treeNode.NodeStatus() == Enums.NodeStatus.ROOT))
+            {
+                throw new TreeException(Constants.TreeConstants.ERRCODE_LEAFANDROOTNODENEEDED, Constants.TreeConstants.ERRMSG_LEAFANDROOTNODENEEDED);
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            var node = obj as TreeNode;
+            return node != null &&
+                   _level == node._level &&
+                   _nodeNumber == node._nodeNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1096092623;
+            hashCode = hashCode * -1521134295 + _level.GetHashCode();
+            hashCode = hashCode * -1521134295 + _nodeNumber.GetHashCode();
+            return hashCode;
         }
     }
 }

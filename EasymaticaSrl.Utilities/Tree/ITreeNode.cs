@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasymaticaSrl.Utilities.Tree.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +10,19 @@ namespace EasymaticaSrl.Utilities.Tree
     public interface ITreeNode
     {
         void AddLeaf(ITreeNode treeNode);        
-        void AddParent(ITreeNode treeNode);
+        void Attach(ITreeNode treeNodeToAttach);
         void DeleteLeaf(int index);
         void Detach();
         bool HasParent();
         bool IsLeaf();        
         int Level();
-        int Index();
+        int NodeNumber();
         int NumbOfChildren();
         int Depth();
         void SetLevel(int level);
-        void SetIndex(int index);
+        void SetNodeNumber(int index);
         IList<ITreeNode> Children();
         IList<ITreeNode> Parent();
+        NodeStatus NodeStatus();
     }
 }
