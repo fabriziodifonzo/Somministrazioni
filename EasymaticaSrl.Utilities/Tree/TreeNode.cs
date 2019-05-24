@@ -1,5 +1,4 @@
 ﻿using EasymaticaSrl.Utilities.Tree.Constants;
-using EasymaticaSrl.Utilities.Tree.Enums;
 using EasymaticaSrl.Utilities.Tree.Exceptions;
 using Somministrazioni.Common.Constants;
 using System;
@@ -24,9 +23,7 @@ namespace EasymaticaSrl.Utilities.Tree
             CheckIsRootAndLeaf(treeNode);
 
             _listChildren.Add(treeNode);
-            ((TreeNode)treeNode).ChangeStatus(Enums.NodeStatus.INSERTED);
-            ((TreeNode)treeNode).Attach(this);
-            ((TreeNode)treeNode).ChangeStatus(Enums.NodeStatus.ATTACHED);
+            ((TreeNode)treeNode)._listParent.Add(this);
             treeNode.SetLevel(this.Level() + 1);
             treeNode.SetNodeNumber(this._listChildren.Count);
         }
@@ -35,14 +32,14 @@ namespace EasymaticaSrl.Utilities.Tree
         {
             CheckIndexOk(index);
             CheckNodeIfLeaf(index);
+
             var child = _listChildren.ElementAt(index - 1);
             child.SetNodeNumber(1);
             CheckIsLeaf(child);
 
-            ((TreeNode)child).Detach();
+            ((TreeNode)child)._listParent.Clear();
             child.SetLevel(1);
             _listChildren.RemoveAt(index - 1);
-            ((TreeNode)child).ChangeStatus(Enums.NodeStatus.ROOT);
 
             int newIndex = 1;
             foreach (var treeNode in _listChildren)
@@ -110,43 +107,25 @@ namespace EasymaticaSrl.Utilities.Tree
             return _listParent.ToImmutableList();
         }
 
-        public NodeStatus NodeStatus()
-        {
-            return _nodeStatus; 
-        }
 
         public bool IsRoot()
         {
             return !_listParent.Any();
         }
 
-        void ChangeStatus(Enums.NodeStatus nodeStatus)
-        {
-            _nodeStatus = nodeStatus;
-        }
 
         void Attach(ITreeNode treeNodeToAttach)
         {
             CheckAttachParameters(treeNodeToAttach);
-            CheckNodeStatusInserted(this);
             CheckAttachToNodeAbove(treeNodeToAttach);
 
             _listParent.Add(treeNodeToAttach);
-        }
-
-        void Detach()
-        {
-            CheckNodeStatusAttached();
-            _nodeStatus = Enums.NodeStatus.INSERTED;
-
-            _listParent.Clear();
         }
 
         readonly IList<ITreeNode> _listChildren = new List<ITreeNode>();
         readonly IList<ITreeNode> _listParent = new List<ITreeNode>();
         int _level = 1;
         int _nodeNumber = 1;
-        NodeStatus _nodeStatus = Enums.NodeStatus.ROOT;
 
         protected TreeNode()
         {
@@ -187,25 +166,6 @@ namespace EasymaticaSrl.Utilities.Tree
                 throw new TreeException(TreeConstants.ERRCODE_ONELEVELABOVEISNEEDEDFORATTACH, TreeConstants.ERRMSG_ONELEVELABOVEISNEEDEDFORATTACH);
             }  
         }
-
-        void CheckNodeStatusInserted(ITreeNode treeNodeToAttach)
-        {
-            Contract.Contract.Precondiction(treeNodeToAttach != null, Constants.TreeConstants.ERRMSG_TREANODECANNOTBENULL);
-
-            if (treeNodeToAttach.NodeStatus() != Enums.NodeStatus.INSERTED)
-            {
-                throw new TreeException(TreeConstants.ERRCODE_INSERTEDNODENEEDED, TreeConstants.ERRMSG_INSERTEDNODENEEDED);
-            }
-        }
-
-        void CheckNodeStatusAttached()
-        {
-            if (NodeStatus() != Enums.NodeStatus.ATTACHED)
-            {
-                throw new TreeException(TreeConstants.ERRCODE_ATTACHEDNODENEEDED, TreeConstants.ERRMSG_ATTACHEDNODENEEDED);
-            }
-        }
-
 
         void CheckIndexOk(int index)
         {
