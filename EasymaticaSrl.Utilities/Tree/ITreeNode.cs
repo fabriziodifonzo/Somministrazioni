@@ -10,10 +10,7 @@ namespace EasymaticaSrl.Utilities.Tree
     public interface ITreeNode
     {
         void AddLeaf(ITreeNode treeNode);        
-        void Attach(ITreeNode treeNodeToAttach);
-        void DeleteLeaf(int index);
-        void Detach();
-        bool HasParent();
+        void DeleteLeaf(int index);        
         bool IsLeaf();        
         int Level();
         int NodeNumber();
@@ -24,5 +21,6 @@ namespace EasymaticaSrl.Utilities.Tree
         IList<ITreeNode> Children();
         IList<ITreeNode> Parent();
         NodeStatus NodeStatus();
+        bool IsRoot();
     }
 }

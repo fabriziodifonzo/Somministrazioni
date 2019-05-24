@@ -24,7 +24,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var leaf = TreeNode.Create();
 
             Assert.IsTrue(leaf.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(leaf.HasParent());
+            Assert.IsTrue(leaf.IsRoot());
             Assert.IsFalse(leaf.Parent().Any());
             Assert.IsFalse(leaf.Children().Any());
             Assert.AreEqual(1, leaf.Level());
@@ -50,7 +50,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -61,7 +61,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -72,7 +72,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -81,7 +81,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -110,7 +110,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -121,7 +121,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -132,7 +132,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -149,7 +149,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -158,7 +158,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -176,7 +176,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node2.AddLeaf(node3);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -185,7 +185,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(3, node1.Depth());
 
             Assert.IsFalse(node2.IsLeaf());
-            Assert.True(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsTrue(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -194,7 +194,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(3, node3.Level());
@@ -232,11 +232,10 @@ namespace EasymaticaSrl.Utilities.Test.Test
         [Test]
         public void VerifyAddNode3()
         {
-
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -247,7 +246,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -260,7 +259,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -275,10 +274,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                if (e.ErrorCode == TreeConstants.ERRCODE_LEAFANDROOTNODENEEDED)
-                {
-                    leafAndNodeNeededExceptionThrown = true;
-                }
+                leafAndNodeNeededExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_LEAFANDROOTNODENEEDED;
             }
 
             Assert.IsTrue(leafAndNodeNeededExceptionThrown);
@@ -289,7 +285,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node3.AddLeaf(node1);
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node1.HasParent());
+            Assert.IsFalse(node1.IsRoot());
             Assert.IsTrue(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(2, node1.Level());
@@ -298,64 +294,13 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node1.Depth());
 
             Assert.IsFalse(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsTrue(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
             Assert.AreEqual(1, node3.NodeNumber());
             Assert.AreEqual(1, node3.NumbOfChildren());
             Assert.AreEqual(2, node3.Depth());
-
-        }
-
-        /**
-         * This test creates two nodes 
-         * 
-         *      Node1     Node2
-         * 
-         * and then Attach Node2 to Node 1     
-         *  before inserting an exception will be thrown.    
-         */
-        [Test]
-        public void VerifyAttach()
-        {
-            var node1 = TreeNode.Create();
-
-            Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
-            Assert.IsFalse(node1.Parent().Any());
-            Assert.IsFalse(node1.Children().Any());
-            Assert.AreEqual(1, node1.Level());
-            Assert.AreEqual(1, node1.NodeNumber());
-            Assert.AreEqual(0, node1.NumbOfChildren());
-            Assert.AreEqual(1, node1.Depth());
-
-            var node2 = TreeNode.Create();
-
-            Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
-            Assert.IsFalse(node2.Parent().Any());
-            Assert.IsFalse(node2.Children().Any());
-            Assert.AreEqual(1, node2.Level());
-            Assert.AreEqual(1, node2.NodeNumber());
-            Assert.AreEqual(0, node2.NumbOfChildren());
-            Assert.AreEqual(1, node2.Depth());
-
-            bool insertedNeedExceptionThrown = false;
-            try
-            {
-                node2.Attach(node1);
-            }
-            catch (TreeException e)
-            {
-                if (e.ErrorCode == TreeConstants.ERRCODE_INSERTEDNODENEEDED)
-                {
-                    insertedNeedExceptionThrown = true;
-                }
-            }
-
-            Assert.IsTrue(insertedNeedExceptionThrown);
-
         }
 
         /**
@@ -367,7 +312,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -378,7 +323,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -389,7 +334,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -398,7 +343,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -409,7 +354,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.DeleteLeaf(node2.NodeNumber());
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -418,7 +363,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -436,7 +381,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -447,7 +392,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -458,7 +403,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -467,7 +412,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -501,7 +446,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -512,7 +457,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -523,7 +468,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -542,7 +487,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node3);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -551,7 +496,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -560,7 +505,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf());
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -576,7 +521,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.DeleteLeaf(node2.NodeNumber());
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -585,7 +530,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -594,7 +539,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -624,7 +569,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -635,7 +580,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -646,7 +591,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -666,7 +611,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node3);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -675,7 +620,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -684,7 +629,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf());
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -700,7 +645,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.DeleteLeaf(node3.NodeNumber());
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -709,7 +654,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -718,7 +663,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -750,7 +695,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -761,7 +706,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -772,7 +717,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -792,7 +737,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node3);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -801,7 +746,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -810,7 +755,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf());
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -826,7 +771,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.DeleteLeaf(node3.NodeNumber());
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -835,7 +780,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -844,7 +789,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -862,7 +807,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
              *    Node2     Node3     (Level2)
             */
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -871,7 +816,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -880,7 +825,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf());
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -922,7 +867,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -933,7 +878,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -944,7 +889,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -963,7 +908,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node3);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -972,7 +917,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -981,7 +926,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf());
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -997,7 +942,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.DeleteLeaf(node2.NodeNumber());
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -1006,7 +951,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -1015,7 +960,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -1034,7 +979,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -1043,7 +988,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -1052,7 +997,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(1, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(2, node3.Level());
@@ -1070,7 +1015,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -1085,10 +1030,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                if (e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX)
-                {
-                    wrongIndexExceptionThrown = true;
-                }
+                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX;
             }
 
             Assert.IsTrue(wrongIndexExceptionThrown);
@@ -1096,7 +1038,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -1119,10 +1061,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                if (e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX)
-                {
-                    wrongIndexExceptionThrown = true;
-                }
+                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX;
             }
 
             Assert.IsTrue(wrongIndexExceptionThrown);
@@ -1134,10 +1073,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                if (e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX)
-                {
-                    wrongIndexExceptionThrown = true;
-                }
+                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX;
             }
 
             Assert.IsTrue(wrongIndexExceptionThrown);
@@ -1164,7 +1100,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node1 = TreeNode.Create();
 
             Assert.IsTrue(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsFalse(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -1175,7 +1111,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node2 = TreeNode.Create();
 
             Assert.IsTrue(node2.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node2.HasParent());
+            Assert.IsTrue(node2.IsRoot());
             Assert.IsFalse(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(1, node2.Level());
@@ -1186,7 +1122,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             var node3 = TreeNode.Create();
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node3.HasParent());
+            Assert.IsTrue(node3.IsRoot());
             Assert.IsFalse(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(1, node3.Level());
@@ -1203,7 +1139,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -1212,7 +1148,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node1.Depth());
 
             Assert.IsTrue(node2.IsLeaf());
-            Assert.IsTrue(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsFalse(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -1230,7 +1166,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node2.AddLeaf(node3);
 
             Assert.IsFalse(node1.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsFalse(node1.HasParent());
+            Assert.IsTrue(node1.IsRoot());
             Assert.IsFalse(node1.Parent().Any());
             Assert.IsTrue(node1.Children().Any());
             Assert.AreEqual(1, node1.Level());
@@ -1239,7 +1175,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(3, node1.Depth());
 
             Assert.IsFalse(node2.IsLeaf());
-            Assert.True(node2.HasParent());
+            Assert.IsFalse(node2.IsRoot());
             Assert.IsTrue(node2.Parent().Any());
             Assert.IsTrue(node2.Children().Any());
             Assert.AreEqual(2, node2.Level());
@@ -1248,7 +1184,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(2, node2.Depth());
 
             Assert.IsTrue(node3.IsLeaf(), TreeConstants.ERRMSG_LEAFNODENEEDED);
-            Assert.IsTrue(node3.HasParent());
+            Assert.IsFalse(node3.IsRoot());
             Assert.IsTrue(node3.Parent().Any());
             Assert.IsFalse(node3.Children().Any());
             Assert.AreEqual(3, node3.Level());
@@ -1263,10 +1199,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                if (e.ErrorCode == TreeConstants.ERRCODE_LEAFNODENEEDED)
-                {
-                    leafNodeNeedExceptionThrown = true;
-                }
+                leafNodeNeedExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_LEAFNODENEEDED;
             }
 
             Assert.IsTrue(leafNodeNeedExceptionThrown);
