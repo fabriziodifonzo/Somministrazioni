@@ -1023,6 +1023,8 @@ namespace EasymaticaSrl.Utilities.Test.Test
             Assert.AreEqual(0, node1.NumbOfChildren());
             Assert.AreEqual(1, node1.Depth());
 
+            //---- Trying to delete the the node number one but tree has no node.
+
             bool wrongIndexExceptionThrown = false;
             try
             {
@@ -1030,7 +1032,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX;
+                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_NODENUMBERNTFOUND;
             }
 
             Assert.IsTrue(wrongIndexExceptionThrown);
@@ -1050,7 +1052,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             node1.AddLeaf(node2);
             node1.DeleteLeaf(1);
 
-            //--- Trying to delete node at wrong index ------
+            //--- Trying to delete node with invalid node number (Node number will start to 0) ------
 
             node1.AddLeaf(node2);
 
@@ -1061,10 +1063,12 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX;
+                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_INVALIDNODENUMBER;
             }
 
             Assert.IsTrue(wrongIndexExceptionThrown);
+
+            //---- Trying to delete the the node number two but tree only has one node.
 
             wrongIndexExceptionThrown = false;
             try
@@ -1073,7 +1077,7 @@ namespace EasymaticaSrl.Utilities.Test.Test
             }
             catch (TreeException e)
             {
-                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_WROONGINDEX;
+                wrongIndexExceptionThrown |= e.ErrorCode == TreeConstants.ERRCODE_NODENUMBERNTFOUND;
             }
 
             Assert.IsTrue(wrongIndexExceptionThrown);

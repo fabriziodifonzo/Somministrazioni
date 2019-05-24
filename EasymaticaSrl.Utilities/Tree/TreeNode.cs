@@ -28,18 +28,18 @@ namespace EasymaticaSrl.Utilities.Tree
             treeNode.SetNodeNumber(this._listChildren.Count);
         }
 
-        public void DeleteLeaf(int index)
+        public void DeleteLeaf(int nodeNumber)
         {
-            CheckIndexOk(index);
-            CheckNodeIfLeaf(index);
+            CheckNodeNumberOk(nodeNumber);
+            CheckNodeIfLeaf(nodeNumber);
 
-            var child = _listChildren.ElementAt(index - 1);
+            var child = _listChildren.ElementAt(nodeNumber - 1);
             child.SetNodeNumber(1);
             CheckIsLeaf(child);
 
             ((TreeNode)child)._listParent.Clear();
             child.SetLevel(1);
-            _listChildren.RemoveAt(index - 1);
+            _listChildren.RemoveAt(nodeNumber-1);
 
             int newIndex = 1;
             foreach (var treeNode in _listChildren)
@@ -107,19 +107,9 @@ namespace EasymaticaSrl.Utilities.Tree
             return _listParent.ToImmutableList();
         }
 
-
         public bool IsRoot()
         {
             return !_listParent.Any();
-        }
-
-
-        void Attach(ITreeNode treeNodeToAttach)
-        {
-            CheckAttachParameters(treeNodeToAttach);
-            CheckAttachToNodeAbove(treeNodeToAttach);
-
-            _listParent.Add(treeNodeToAttach);
         }
 
         readonly IList<ITreeNode> _listChildren = new List<ITreeNode>();
@@ -149,29 +139,16 @@ namespace EasymaticaSrl.Utilities.Tree
             }
         }
 
-        void CheckAttachParameters(ITreeNode treeNode)
+        void CheckNodeNumberOk(int nodeNumber)
         {
-            if (treeNode == null)
+            if (nodeNumber <= 0)
             {
-                throw new ArgumentException(GenericConstants.ERRMSG_NULLOREMPTYARGUMENT + GenericConstants.CHR_SPACE + nameof(treeNode));
+                throw new TreeException(TreeConstants.ERRCODE_INVALIDNODENUMBER, TreeConstants.ERRMSG_INVALIDNODENUMBER);
             }
-        }
 
-        void CheckAttachToNodeAbove(ITreeNode treeNodeToAttach)
-        {
-            Contract.Contract.Precondiction(treeNodeToAttach != null, Constants.TreeConstants.ERRMSG_TREANODECANNOTBENULL);
-
-            if (_listChildren.Contains(treeNodeToAttach))
+            if ((nodeNumber-1 < 0) || (nodeNumber-1 >= NumbOfChildren()))
             {
-                throw new TreeException(TreeConstants.ERRCODE_ONELEVELABOVEISNEEDEDFORATTACH, TreeConstants.ERRMSG_ONELEVELABOVEISNEEDEDFORATTACH);
-            }  
-        }
-
-        void CheckIndexOk(int index)
-        {
-            if ((index -1 < 0) || (index - 1 >= NumbOfChildren()))
-            {
-                throw new TreeException(Constants.TreeConstants.ERRCODE_WROONGINDEX, Constants.TreeConstants.ERRMSG_WROONGINDEX);
+                throw new TreeException(TreeConstants.ERRCODE_NODENUMBERNTFOUND, TreeConstants.ERRMSG_NODENUMBERNTFOUND);
             }
         }
 
@@ -189,22 +166,6 @@ namespace EasymaticaSrl.Utilities.Tree
             {
                 throw new TreeException(Constants.TreeConstants.ERRCODE_LEAFANDROOTNODENEEDED, Constants.TreeConstants.ERRMSG_LEAFANDROOTNODENEEDED);
             }
-        }
-
-        public override bool Equals(object obj)
-        {
-            var node = obj as TreeNode;
-            return node != null &&
-                   _level == node._level &&
-                   _nodeNumber == node._nodeNumber;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1096092623;
-            hashCode = hashCode * -1521134295 + _level.GetHashCode();
-            hashCode = hashCode * -1521134295 + _nodeNumber.GetHashCode();
-            return hashCode;
         }
     }
 }
