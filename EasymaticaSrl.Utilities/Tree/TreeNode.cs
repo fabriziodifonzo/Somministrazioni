@@ -24,8 +24,8 @@ namespace EasymaticaSrl.Utilities.Tree
 
             _listChildren.Add(treeNode);
             ((TreeNode)treeNode)._listParent.Add(this);
-            treeNode.SetLevel(this.Level() + 1);
-            treeNode.SetNodeNumber(this._listChildren.Count);
+            ((TreeNode)treeNode)._level = this.Level()+1;
+            ((TreeNode)treeNode)._nodeNumber = this._listChildren.Count;
         }
 
         public void DeleteLeaf(int nodeNumber)
@@ -34,19 +34,14 @@ namespace EasymaticaSrl.Utilities.Tree
             CheckNodeIfLeaf(nodeNumber);
 
             var child = _listChildren.ElementAt(nodeNumber - 1);
-            child.SetNodeNumber(1);
+            ((TreeNode)child)._nodeNumber = 1;
             CheckIsLeaf(child);
 
             ((TreeNode)child)._listParent.Clear();
-            child.SetLevel(1);
+            ((TreeNode)child)._level = 1;
+                
             _listChildren.RemoveAt(nodeNumber-1);
-
-            int newIndex = 1;
-            foreach (var treeNode in _listChildren)
-            {
-                treeNode.SetNodeNumber(newIndex);
-                newIndex++;
-            }
+            RenumberChildren();
         }
 
         public bool IsLeaf()
@@ -84,17 +79,6 @@ namespace EasymaticaSrl.Utilities.Tree
                 }
                 return dept + 1;
             }
-
-        }
-
-        public void SetLevel(int level)
-        {
-            _level = level;
-        }
-
-        public void SetNodeNumber(int index)
-        {
-            _nodeNumber = index;
         }
 
         public IList<ITreeNode> Children()
@@ -119,6 +103,16 @@ namespace EasymaticaSrl.Utilities.Tree
 
         protected TreeNode()
         {
+        }
+
+        private void RenumberChildren()
+        {
+            int newIndex = 1;
+            foreach (var treeNode in _listChildren)
+            {
+                ((TreeNode)treeNode)._nodeNumber = newIndex;
+                newIndex++;
+            }
         }
 
         void CheckAddChildParameters(ITreeNode treeNode)
