@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasymaticaSrl.Utilities.Tree.Visitors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace EasymaticaSrl.Utilities.Tree
 {
+    /// <summary>
+    /// It Contains methods to manipulate a tree root node.
+    /// </summary>
     public interface ITreeNode
     {
         /// <summary>
@@ -114,5 +118,9 @@ namespace EasymaticaSrl.Utilities.Tree
         /// </summary>
         /// <returns>A list representing the parent of the node.</returns>
         IList<ITreeNode> Parent();
+
+        string Path();
+
+        void Accept(ITreeVisitor visitor);
     }
 }

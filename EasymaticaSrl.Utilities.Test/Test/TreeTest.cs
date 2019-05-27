@@ -1,6 +1,7 @@
 ﻿using EasymaticaSrl.Utilities.Tree;
 using EasymaticaSrl.Utilities.Tree.Constants;
 using EasymaticaSrl.Utilities.Tree.Exceptions;
+using EasymaticaSrl.Utilities.Tree.Visitors;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -1211,6 +1212,30 @@ namespace EasymaticaSrl.Utilities.Test.Test
             //Ok now
             node2.DeleteLeaf(1);            
             node1.DeleteLeaf(1);
+        }
+
+        [Test]
+        public void VerifyPreOrderTrasverse()
+        {
+            var node1 = TreeNode.Create();
+            var node_1_1 = TreeNode.Create();
+            var node_2_1 = TreeNode.Create();
+            var node_3_1 = TreeNode.Create();
+
+            var node_1_1_1 = TreeNode.Create();
+            var node_2_2_2 = TreeNode.Create();
+            var node_3_3_1 = TreeNode.Create();
+
+
+            node1.AddLeaf(node_1_1);
+            node1.AddLeaf(node_2_1);
+            node1.AddLeaf(node_3_1);
+
+            node_1_1.AddLeaf(node_1_1_1);
+            node_2_1.AddLeaf(node_2_2_2);
+            node_3_1.AddLeaf(node_3_3_1);
+
+            node1.Accept(new PreOrderVisitor());
         }
     }
 }

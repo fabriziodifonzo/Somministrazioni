@@ -1,5 +1,6 @@
 ﻿using EasymaticaSrl.Utilities.Tree.Constants;
 using EasymaticaSrl.Utilities.Tree.Exceptions;
+using EasymaticaSrl.Utilities.Tree.Visitors;
 using Somministrazioni.Common.Constants;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,26 @@ namespace EasymaticaSrl.Utilities.Tree
         public static ITreeNode Create()
         {
             return new TreeNode();
+        }
+
+        public void Accept(ITreeVisitor visitor)
+        {
+            var mapTree = new Dictionary<int, IList<ITreeNode>>();
+            var mapRes = visitor.Visit(this, mapTree);
+
+            //---- Print the map ----
+
+            IList<ITreeNode> listNodes = null;
+            for (int level = 1; level <= mapTree.Count; level++)
+            {
+                Console.Out.WriteLine("Level" + level);
+                mapRes.TryGetValue(level, out listNodes);
+
+                foreach (var treeNode in listNodes)
+                {
+                    Console.Out.WriteLine("Node Path: " + treeNode.Path());
+                }
+            }
         }
 
         public void AddLeaf(ITreeNode treeNode)
@@ -94,6 +115,19 @@ namespace EasymaticaSrl.Utilities.Tree
         public bool IsRoot()
         {
             return !_listParent.Any();
+        }
+
+        public string Path()
+        {
+            string path = _nodeNumber.ToString();
+            ITreeNode treeNode = this;
+            while (!treeNode.IsRoot())
+            {
+                treeNode = treeNode.Parent().First();
+                path = (new StringBuilder(path)).Append("_").Append(treeNode.NodeNumber().ToString()).ToString();
+
+            }
+            return path;
         }
 
         readonly IList<ITreeNode> _listChildren = new List<ITreeNode>();

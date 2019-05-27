@@ -56,6 +56,8 @@
     <Compile Include="Tree\Exceptions\TreeException.cs" />
     <Compile Include="Tree\ITreeNode.cs" />
     <Compile Include="Tree\TreeNode.cs" />
+    <Compile Include="Tree\Visitors\ITreeVisitor.cs" />
+    <Compile Include="Tree\Visitors\PreOrderVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Somministrazioni.Common\Somministrazioni.Common.csproj">
