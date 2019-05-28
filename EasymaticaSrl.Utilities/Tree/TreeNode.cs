@@ -124,7 +124,7 @@ namespace EasymaticaSrl.Utilities.Tree
             while (!treeNode.IsRoot())
             {
                 treeNode = treeNode.Parent().First();
-                path = (new StringBuilder(path)).Append("_").Append(treeNode.NodeNumber().ToString()).ToString();
+                path = (new StringBuilder(path)).Append("_").Append(((TreeNode)treeNode)._label.ToString()).ToString();
 
             }
             return path;
@@ -134,9 +134,16 @@ namespace EasymaticaSrl.Utilities.Tree
         readonly IList<ITreeNode> _listParent = new List<ITreeNode>();
         int _level = 1;
         int _nodeNumber = 1;
+        readonly string _label;
 
         protected TreeNode()
         {
+            _label = _nodeNumber.ToString();
+        }
+
+        protected TreeNode(string label)
+        {
+            _label = label;
         }
 
         private void RenumberChildren()
