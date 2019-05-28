@@ -1,5 +1,6 @@
 ﻿using EasymaticaSrl.Utilities.Tree.Constants;
 using EasymaticaSrl.Utilities.Tree.Exceptions;
+using EasymaticaSrl.Utilities.Tree.Helper;
 using EasymaticaSrl.Utilities.Tree.Visitors;
 using Somministrazioni.Common.Constants;
 using System;
@@ -33,7 +34,7 @@ namespace EasymaticaSrl.Utilities.Tree
 
                 foreach (var treeNode in listNodes)
                 {
-                    Console.Out.WriteLine("Node Path: " + treeNode.Path());
+                    Console.Out.WriteLine("Node Path: " + TreeHelper.PrintPath(treeNode.Path(), '-'));
                 }
             }
         }
@@ -117,17 +118,17 @@ namespace EasymaticaSrl.Utilities.Tree
             return !_listParent.Any();
         }
 
-        public string Path()
+        public virtual string[] Path()
         {
-            string path = _label;
+            var listPath = new List<string>();
+            listPath.Add(_label);
             ITreeNode treeNode = this;
             while (!treeNode.IsRoot())
             {
-                treeNode = treeNode.Parent().First();
-                path = (new StringBuilder(path)).Append("_").Append(((TreeNode)treeNode)._label.ToString()).ToString();
-
+                treeNode = treeNode.Parent().First();               
+                listPath.Add(((TreeNode)treeNode)._label.ToString());
             }
-            return path;
+            return listPath.ToArray();
         }
 
         readonly IList<ITreeNode> _listChildren = new List<ITreeNode>();

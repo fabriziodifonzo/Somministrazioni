@@ -119,7 +119,11 @@ namespace EasymaticaSrl.Utilities.Tree
         /// <returns>A list representing the parent of the node.</returns>
         IList<ITreeNode> Parent();
 
-        string Path();
+        /// <summary>
+        /// Return the path list starting from the leaf to the node.
+        /// </summary>
+        /// <returns>Path list</returns>
+        string[] Path();
 
         void Accept(ITreeVisitor visitor);
     }
