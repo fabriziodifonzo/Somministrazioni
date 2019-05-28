@@ -119,7 +119,7 @@ namespace EasymaticaSrl.Utilities.Tree
 
         public string Path()
         {
-            string path = _nodeNumber.ToString();
+            string path = _label;
             ITreeNode treeNode = this;
             while (!treeNode.IsRoot())
             {
