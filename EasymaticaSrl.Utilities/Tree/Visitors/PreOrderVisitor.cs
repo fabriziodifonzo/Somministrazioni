@@ -11,7 +11,9 @@ namespace EasymaticaSrl.Utilities.Tree.Visitors
     public class PreOrderVisitor : ITreeVisitor
     {
         public IDictionary<int, IList<ITreeNode>> Visit(ITreeNode treeRootNode, IDictionary<int, IList<ITreeNode>> mapTree)    
-        {            
+        {
+            CheckVisitParameters(treeRootNode, mapTree);
+
             IList<ITreeNode> listNodes = null;
             if (mapTree.TryGetValue(treeRootNode.Level(), out listNodes))
             {
@@ -31,41 +33,16 @@ namespace EasymaticaSrl.Utilities.Tree.Visitors
             return mapTree;
         }
 
-        IDictionary<int, IList<ITreeNode>> MakeTree(ITreeNode treeNode, int level, IDictionary<int, IList<ITreeNode>> tree)
+        void CheckVisitParameters(ITreeNode treeRootNode, IDictionary<int, IList<ITreeNode>> mapTree)
         {
-            Contract.Contract.Precondiction(treeNode != null, GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(treeNode));
-
-            IDictionary<int, IList<ITreeNode>> treeToReturn = tree;
-
-            IList <ITreeNode> listNodes = new List<ITreeNode>();
-            if (treeNode.IsRoot())
+            if (treeRootNode == null)
             {
-                listNodes.Add(treeNode);
-                tree.Add(level, listNodes);
-                if (!treeNode.IsLeaf())
-                {
-                    treeToReturn = MakeTree(treeNode.Children().First(), ++level, tree);
-                }
-                return treeToReturn;
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(treeRootNode));
             }
-            else if (!treeNode.IsLeaf())
+            if (mapTree == null)
             {
-                foreach (var parent in treeNode.Parent())
-                {
-                    listNodes.Add(treeNode);
-                }
-                treeToReturn.Add(level, listNodes);
-                return MakeTree(treeNode.Children().First(), ++level, treeToReturn);
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(mapTree));
             }
-            else //Leaf
-            {
-                foreach (var parent in treeNode.Parent().First().Children())
-                {
-                    listNodes.Add(treeNode);
-                }
-                treeToReturn.Add(level, listNodes);
-                return treeToReturn;
-            }              
         }
 
         readonly int ROOT_LEVEL = 1;
