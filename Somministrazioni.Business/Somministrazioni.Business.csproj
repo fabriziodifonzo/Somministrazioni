@@ -51,6 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Browsers\Distinte\DistinteBrowser.cs" />
+    <Compile Include="Components\Browsers\Distinte\DistinteBrowserFactory.cs" />
+    <Compile Include="Components\Browsers\Distinte\IDistinteBrowser.cs" />
+    <Compile Include="Components\Browsers\Filters\ContrattoFilter.cs" />
+    <Compile Include="Components\Browsers\Filters\DistintaFilter.cs" />
+    <Compile Include="Components\Browsers\Models\ContrattoBrowsed.cs" />
+    <Compile Include="Components\Browsers\Models\DistintaBrowsed.cs" />
     <Compile Include="Components\Managers\IUserManager.cs" />
     <Compile Include="Components\Managers\UserManager.cs" />
     <Compile Include="Components\Managers\UserManagerBase.cs" />
@@ -62,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EasymaticaSrl.Utilities\EasymaticaSrl.Utilities.csproj">
+      <Project>{5DA2A5C9-D8E3-49A6-991F-62F6861E97BE}</Project>
+      <Name>EasymaticaSrl.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Somministrazioni.Common\Somministrazioni.Common.csproj">
       <Project>{79ba3d00-4a8f-4494-930d-0e8048775825}</Project>
       <Name>Somministrazioni.Common</Name>
@@ -71,5 +82,6 @@
       <Name>Sommnistrazioni.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

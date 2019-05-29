@@ -10,7 +10,7 @@ namespace EasymaticaSrl.Utilities.Contract
 {
     public static class Contract
     {
-        public static void Precondiction(Boolean assertion)
+        public static void PreCondiction(Boolean assertion)
         {
             if (!assertion)
             {
