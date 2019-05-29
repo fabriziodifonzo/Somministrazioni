@@ -54,8 +54,6 @@
     <Compile Include="Components\Browsers\Distinte\DistinteBrowser.cs" />
     <Compile Include="Components\Browsers\Distinte\DistinteBrowserFactory.cs" />
     <Compile Include="Components\Browsers\Distinte\IDistinteBrowser.cs" />
-    <Compile Include="Components\Browsers\Filters\ContrattoFilter.cs" />
-    <Compile Include="Components\Browsers\Filters\DistintaFilter.cs" />
     <Compile Include="Components\Browsers\Models\ContrattoBrowsed.cs" />
     <Compile Include="Components\Browsers\Models\DistintaBrowsed.cs" />
     <Compile Include="Components\Managers\IUserManager.cs" />

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Somministrazioni.Business.Components.Browsers.Filters
+namespace Sommnistrazioni.Data.Models
 {
-    public class ContrattoFilter
+    public class DistintaBrowsed
     {
     }
 }

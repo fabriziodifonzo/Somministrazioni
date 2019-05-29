@@ -22,7 +22,6 @@ namespace Sommnistrazioni.Data.DataService.User
 
             const bool VERIFYPASSWORDKO = false;
 
-            int FIRST_ELEMENT = 0;
             var userRepository = UserRepositoryFactory.GetInstance(_ambientDbContextLocator);
             using (var context = _dbContextScopeFactory.CreateReadOnly())
             {
@@ -32,7 +31,7 @@ namespace Sommnistrazioni.Data.DataService.User
                 idOperatore = null;
                 if (listOperatori.Any())
                 {
-                    var operatore = listOperatori.ElementAt(FIRST_ELEMENT);                    
+                    var operatore = listOperatori.First();
                     verifyPassword = PasswordEncryptor.VerifyPassword(password, operatore.Password);
                     idOperatore = operatore.Id.ToString();
                 }

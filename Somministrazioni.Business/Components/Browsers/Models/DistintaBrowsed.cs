@@ -15,6 +15,11 @@ namespace Somministrazioni.Business.Components.Browsers.Models
             return new DistintaBrowsed(statoDistinta);
         }
 
+        public DistintaBrowsed From(Sommnistrazioni.Data.Models.DistintaBrowsed distintaBrowsed)
+        {
+            throw new NotImplementedException();
+        }
+
         public StatoDistinta StatoDistinta
         {
             get
