@@ -121,7 +121,8 @@ namespace Somministrazioni.Web.Controllers
         {
             public ActionInfo SelectView()
             {
-                return ActionInfo.Of(GenericConstants.CONTROLLERNAME_APPLICATIONHOME, GenericConstants.ACTIONNAME_APPLICATIONHOME_INDEX);
+                //return ActionInfo.Of(GenericConstants.CONTROLLERNAME_APPLICATIONHOME, GenericConstants.ACTIONNAME_APPLICATIONHOME_INDEX);
+                return ActionInfo.Of(GenericConstants.CONTROLLERNAME_DISTINTE, GenericConstants.ACTIONNAME_DISTINTE_INDEX);
             }
         }
 

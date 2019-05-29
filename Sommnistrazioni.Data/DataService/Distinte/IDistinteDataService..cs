@@ -11,5 +11,6 @@ namespace Sommnistrazioni.Data.DataService.Distinte
     public interface IDistinteDataService
     {
         IList<DistintaBrowsed> BrowserDistinta(DistintaFilter filter);
+
     }
 }
