@@ -25,11 +25,11 @@ namespace Somministrazioni.Common.Filters
             }
         }
 
-        public int CurrentPageIndex
+        public int CurrentPageNumb
         {
             get
             {
-                return _currentPageIndex;
+                return _currentPageNumb;
             }
         }
 
@@ -48,14 +48,14 @@ namespace Somministrazioni.Common.Filters
 
             _sortBy = sortBy;
             _sortDirection = sortDirection;
-            _currentPageIndex = currentPageIndex;
+            _currentPageNumb = currentPageIndex;
             _pageSize = pageSize;
 
         }
 
         readonly string _sortBy;
         readonly string _sortDirection;
-        readonly int _currentPageIndex;
+        readonly int _currentPageNumb;
         readonly int _pageSize;
 
         static void CheckConstructorParameter(String sortBy, string sortDirection)

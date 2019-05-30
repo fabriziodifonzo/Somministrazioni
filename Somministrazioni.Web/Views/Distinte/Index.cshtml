@@ -11,16 +11,30 @@
 {
     @Html.AntiForgeryToken();
 
-    <p>Enter the SortBy: @Html.TextBoxFor(m=>m.SortBy)</p>
-    <p>Enter the Sort Direction: @Html.TextBoxFor(m=>m.SortDirection)</p>        
-    <p>Enter the Current Page: @Html.TextBoxFor(m=>m.CurrentPageIndex)</p>        
-    <p>Enter the Page Size: @Html.TextBoxFor(m=>m.PageSize)</p>
-    <p>Enter the Field1: @Html.TextBoxFor(m=>m.Field1)</p>
-    <p>Enter the Field2: @Html.TextBoxFor(m => m.Field2)</p>        
+    <p>Enter the SortBy: @Html.TextBoxFor(m => m.SortBy)</p>
+    <p>Enter the Sort Direction: @Html.TextBoxFor(m => m.SortDirection)</p>
+    <p>Enter the Current Page: @Html.TextBoxFor(m => m.CurrentPageNumb)</p>
+    <p>Enter the Page Size: @Html.TextBoxFor(m => m.PageSize)</p>
+    <p>Enter the Field1: @Html.TextBoxFor(m => m.Field1)</p>
+    <p>Enter the Field2: @Html.TextBoxFor(m => m.Field2)</p>
 
-     <input type="submit" value="Submit" name="submit" class="submit" />
-     <div id="infoPanel">
+    <input type="submit" value="Submit" name="submit" class="submit" />
+    <div id="infoPanel">
         <p>@Model.Message</p>
-     </div>
-    }
+    </div>
+
+    <table style="width:100%">
+        <tr>
+            <th>Codice</th>
+            <th>Stato</th>
+        </tr>
+        @foreach (var distintaBrowsed in Model.ListDistintaBrowsed)
+        {
+            <tr>
+                <th>@distintaBrowsed.Codice</th>
+                <th>@distintaBrowsed.StatoDistinta</th>
+            </tr>
+        }
+        </table>
+}
 

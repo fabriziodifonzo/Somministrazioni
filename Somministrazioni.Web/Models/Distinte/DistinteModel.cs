@@ -43,7 +43,7 @@ namespace Somministrazioni.Web.Models.Distinte
 
         public DistintaFilter ToFilter()
         {
-            return DistintaFilter.Of(SortBy, SortDirection, CurrentPageIndex, PageSize);
+            return DistintaFilter.Of(SortBy, SortDirection, CurrentPageNumb, PageSize);
         }
 
         IList<DistintaBrowsed> _listDistintaBrowsed;

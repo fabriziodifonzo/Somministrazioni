@@ -10,14 +10,22 @@ namespace Somministrazioni.Business.Components.Browsers.Models
 {
     public sealed class DistintaBrowsed
     {
-        public static DistintaBrowsed Of(StatoDistinta statoDistinta)
+        public static DistintaBrowsed Of(string codice, StatoDistinta statoDistinta)
         {
-            return new DistintaBrowsed(statoDistinta);
+            return new DistintaBrowsed(codice, statoDistinta);
         }
 
         public static DistintaBrowsed From(Sommnistrazioni.Data.Models.DistintaBrowsed distintaBrowsed)
         {
-            return DistintaBrowsed.Of(distintaBrowsed.StatoDistinta);
+            return DistintaBrowsed.Of(distintaBrowsed.Codice, distintaBrowsed.StatoDistinta);
+        }
+
+        public string Codice
+        {
+            get
+            {
+                return _codice;
+            }
         }
 
         public StatoDistinta StatoDistinta
@@ -28,11 +36,13 @@ namespace Somministrazioni.Business.Components.Browsers.Models
             }
         }
 
-        DistintaBrowsed(StatoDistinta statoDistinta)
+        DistintaBrowsed(string codice, StatoDistinta statoDistinta)
         {
+            _codice = codice;
             _statoDistinta = statoDistinta;
         }
 
+        readonly string _codice;
         readonly StatoDistinta _statoDistinta;
     }
 }

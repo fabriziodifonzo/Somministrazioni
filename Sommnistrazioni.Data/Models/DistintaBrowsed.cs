@@ -9,9 +9,17 @@ namespace Sommnistrazioni.Data.Models
 {
     public sealed class DistintaBrowsed
     {
-        public static DistintaBrowsed Of(StatoDistinta statoDistinta)
+        public static DistintaBrowsed Of(string codice, StatoDistinta statoDistinta)
         {
-            return new DistintaBrowsed(statoDistinta);
+            return new DistintaBrowsed(codice, statoDistinta);
+        }
+
+        public string Codice 
+        {
+            get
+            {
+                return _codice;
+            }
         }
 
         public StatoDistinta StatoDistinta
@@ -22,11 +30,13 @@ namespace Sommnistrazioni.Data.Models
             }
         }
 
-        DistintaBrowsed(StatoDistinta statoDistinta)
+        DistintaBrowsed(string codice, StatoDistinta statoDistinta)
         {
+            _codice = codice;
             _statoDistinta = statoDistinta;
         }
 
+        readonly string _codice;
         readonly StatoDistinta _statoDistinta;
     }
 }

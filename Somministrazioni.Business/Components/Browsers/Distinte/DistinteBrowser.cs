@@ -36,7 +36,7 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
                 listDistinteBrowsed.Add(DistintaBrowsed.From(distinta));
             }
 
-            var pageNumber = filtroRicerca.CurrentPageIndex;
+            var pageNumber = filtroRicerca.CurrentPageNumb;
             var pageSize = filtroRicerca.PageSize;
 
             return DistintaBrowsedPagedResult.Of(listDistinteBrowsed, PagedResultInfoBase.Of(pageNumber, pageSize, numDistinte));

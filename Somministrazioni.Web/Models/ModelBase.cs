@@ -51,7 +51,7 @@ namespace Somministrazioni.Web.Models
             }
         }
 
-        public int CurrentPageIndex
+        public int CurrentPageNumb
         {
             get;set;
         }

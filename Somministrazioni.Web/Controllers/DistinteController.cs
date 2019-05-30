@@ -1,6 +1,7 @@
 ﻿using log4net;
 using Somministrazioni.BusinessFacade;
 using Somministrazioni.Common.Constants;
+using Somministrazioni.Web.Constants;
 using Somministrazioni.Web.Models.Distinte;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,17 @@ namespace Somministrazioni.Web.Controllers
 {
     public class DistinteController : Controller
     {
+        //Get
         public ActionResult Index()
         {
             _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
             DistinteModel distinteModel = new DistinteModel();
+            distinteModel.PageSize = WebConstants.PAGESISZE_DEFAULT;
+            distinteModel.CurrentPageNumb = WebConstants.PAGENUMB_DEFAULT;
 
             var factory = BusinessFacadeFactory.GetInstance();
             var distinteBrowsedPagedResult = factory.Distinte(distinteModel.ToFilter());
-
             distinteModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
 
             _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
