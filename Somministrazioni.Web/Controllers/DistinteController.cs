@@ -1,4 +1,5 @@
 ﻿using log4net;
+using Somministrazioni.BusinessFacade;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Web.Models.Distinte;
 using System;
@@ -14,7 +15,17 @@ namespace Somministrazioni.Web.Controllers
     {
         public ActionResult Index()
         {
+            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+
             DistinteModel distinteModel = new DistinteModel();
+
+            var factory = BusinessFacadeFactory.GetInstance();
+            var distinteBrowsedPagedResult = factory.Distinte(distinteModel.ToFilter());
+
+            distinteModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
+
+            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
+
             return View(distinteModel);
         }
 
@@ -23,6 +34,12 @@ namespace Somministrazioni.Web.Controllers
         public ActionResult Index(DistinteModel distinteModel)
         {
             _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+
+            var factory = BusinessFacadeFactory.GetInstance();
+            var distinteBrowsedPagedResult = factory.Distinte(distinteModel.ToFilter());
+
+            distinteModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
+
             _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(distinteModel);

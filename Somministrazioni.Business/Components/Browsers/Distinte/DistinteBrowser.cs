@@ -1,4 +1,7 @@
-﻿using EntityFramework.DbContextScope.Interfaces;
+﻿using CCWeb.Business.Components.Browsers;
+using CCWeb.Business.Components.Browsers.Models.Distinte;
+using EntityFramework.DbContextScope.Interfaces;
+using Somministrazioni.Business.Components.Browsers.Models;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
 using Sommnistrazioni.Data.DataService.Distinte;
@@ -17,14 +20,26 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
             CheckConstructorParameters(ambientDbContextLocator);
 
             _ambientDbContextLocator = ambientDbContextLocator;
-
         }
 
-        public void BrowseDistinte(DistintaFilter filter)
+        public DistintaBrowsedPagedResult BrowseDistinte(DistintaFilter filtroRicerca)
         {
+            CheckBrowseDistinteParameters(filtroRicerca);
+
             var distinteDataService = DistinteDataServiceFactory.GetInstance(_ambientDbContextLocator);
 
-            var listDistinte = distinteDataService.BrowserDistinta(filter);
+            var numDistinte = distinteDataService.CountDistinte(filtroRicerca);
+            var listDistinteFromDS = distinteDataService.BrowserDistinta(filtroRicerca);
+            var listDistinteBrowsed = new List<DistintaBrowsed>();
+            foreach (var distinta in listDistinteFromDS)
+            {
+                listDistinteBrowsed.Add(DistintaBrowsed.From(distinta));
+            }
+
+            var pageNumber = filtroRicerca.CurrentPageIndex;
+            var pageSize = filtroRicerca.PageSize;
+
+            return DistintaBrowsedPagedResult.Of(listDistinteBrowsed, PagedResultInfoBase.Of(pageNumber, pageSize, numDistinte));
         }
 
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
@@ -34,6 +49,14 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
             if (ambientDbContextLocator == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
+            }
+        }
+
+        static void CheckBrowseDistinteParameters(DistintaFilter filtroRicerca)
+        {
+            if (filtroRicerca == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(filtroRicerca));
             }
         }
     }

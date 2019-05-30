@@ -26,6 +26,13 @@ namespace Sommnistrazioni.Data.DataService.Distinte
             return new List<DistintaBrowsed>();
         }
 
+        public int CountDistinte(DistintaFilter filter)
+        {
+            CheckCountDistinteParameters(filter);
+
+            return BrowserDistinta(filter).Count;
+        }
+
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
 
         static void CheckConstructorParameters(IAmbientDbContextLocator ambientDbContextLocator)
@@ -37,6 +44,14 @@ namespace Sommnistrazioni.Data.DataService.Distinte
         }
 
         static void CheckBrowserDistintaParameters(DistintaFilter filter)
+        {
+            if (filter == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(filter));
+            }
+        }
+
+        static void CheckCountDistinteParameters(DistintaFilter filter)
         {
             if (filter == null)
             {

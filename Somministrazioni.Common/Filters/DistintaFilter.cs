@@ -9,7 +9,12 @@ namespace Somministrazioni.Common.Filters
 {
     public sealed class DistintaFilter : FilterBase
     {
-        public DistintaFilter(String sortBy, string sortDirection, int currentPageIndex, int pageSize) : base(sortBy, sortDirection, currentPageIndex, pageSize)
+        public static DistintaFilter Of(string sortBy, string sortDirection, int currentPageIndex, int pageSize)
+        {
+            return new DistintaFilter(sortBy, sortDirection, currentPageIndex, pageSize);
+        }
+
+        DistintaFilter(String sortBy, string sortDirection, int currentPageIndex, int pageSize) : base(sortBy, sortDirection, currentPageIndex, pageSize)
         {
             CheckConstructorParameter(sortBy, sortDirection);
         }

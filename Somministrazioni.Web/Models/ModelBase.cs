@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyMaticaSrl.Utilities.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,12 +35,7 @@ namespace Somministrazioni.Web.Models
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    value = string.Empty;
-                }
-
-                _sortBy = value;
+                _sortBy = StringHelper.EmptyIfNull(value);
             }
         }
 
@@ -51,11 +47,7 @@ namespace Somministrazioni.Web.Models
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    value = string.Empty;
-                }
-                _sortDirection = value;
+                _sortDirection = StringHelper.EmptyIfNull(value);
             }
         }
 

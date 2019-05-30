@@ -62,6 +62,9 @@
       <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -224,9 +227,17 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EasymaticaSrl.Utilities\EasymaticaSrl.Utilities.csproj">
+      <Project>{5DA2A5C9-D8E3-49A6-991F-62F6861E97BE}</Project>
+      <Name>EasymaticaSrl.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Somministrazioni.BusinessFacade\Somministrazioni.BusinessFacade.csproj">
       <Project>{94717179-240f-48ca-87b3-0e0dbcc8b1e8}</Project>
       <Name>Somministrazioni.BusinessFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Somministrazioni.Business\Somministrazioni.Business.csproj">
+      <Project>{C0F17FB9-FA74-4B91-AE13-FDD90C96B3B5}</Project>
+      <Name>Somministrazioni.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Somministrazioni.Common\Somministrazioni.Common.csproj">
       <Project>{79ba3d00-4a8f-4494-930d-0e8048775825}</Project>

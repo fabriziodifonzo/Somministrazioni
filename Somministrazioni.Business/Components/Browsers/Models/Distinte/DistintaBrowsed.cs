@@ -10,14 +10,14 @@ namespace Somministrazioni.Business.Components.Browsers.Models
 {
     public sealed class DistintaBrowsed
     {
-        public DistintaBrowsed Of(StatoDistinta statoDistinta)
+        public static DistintaBrowsed Of(StatoDistinta statoDistinta)
         {
             return new DistintaBrowsed(statoDistinta);
         }
 
-        public DistintaBrowsed From(Sommnistrazioni.Data.Models.DistintaBrowsed distintaBrowsed)
+        public static DistintaBrowsed From(Sommnistrazioni.Data.Models.DistintaBrowsed distintaBrowsed)
         {
-            throw new NotImplementedException();
+            return DistintaBrowsed.Of(distintaBrowsed.StatoDistinta);
         }
 
         public StatoDistinta StatoDistinta
