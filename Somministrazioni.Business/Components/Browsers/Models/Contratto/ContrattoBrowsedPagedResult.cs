@@ -1,5 +1,4 @@
 ﻿using CCWeb.Business.Components.Browsers.Models.Distinte;
-using Somministrazioni.Business.Components.Browsers.Models;
 using Somministrazioni.Common.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCWeb.Business.Components.Browsers
+namespace Somministrazioni.Business.Components.Browsers.Models.Contratto
 {
-    public sealed class DistintaBrowsedPagedResult
+    public class ContrattoBrowsedPagedResult
     {
         public PagedResultInfoBase PagedResultInfoBase
         {
@@ -20,32 +19,32 @@ namespace CCWeb.Business.Components.Browsers
             }
         }
 
-        public IList<DistintaBrowsed> ListDistinte
+        public IList<ContrattoBrowsed> ListContratti
         {
             get
             {
-                return _listDistinte.ToImmutableList();
+                return _listContratti.ToImmutableList();
             }
         }
 
-        public static DistintaBrowsedPagedResult Of(IList<DistintaBrowsed> listDistinte, PagedResultInfoBase pagedResultInfoBase)
+        public static ContrattoBrowsedPagedResult Of(IList<ContrattoBrowsed> listContratti, PagedResultInfoBase pagedResultInfoBase)
         {
-            CheckOfParameters(listDistinte, pagedResultInfoBase);
+            CheckOfParameters(listContratti, pagedResultInfoBase);
 
-            return new DistintaBrowsedPagedResult(listDistinte, pagedResultInfoBase);
+            return new ContrattoBrowsedPagedResult(listContratti, pagedResultInfoBase);
 
         }
 
-        DistintaBrowsedPagedResult(IList<DistintaBrowsed> listDistinte, PagedResultInfoBase pagedResultInfoBase)
+        ContrattoBrowsedPagedResult(IList<ContrattoBrowsed> listContratti, PagedResultInfoBase pagedResultInfoBase)
         {
-            _listDistinte = listDistinte ?? throw new ArgumentNullException(nameof(listDistinte));
+            _listContratti = listContratti ?? throw new ArgumentNullException(nameof(listContratti));
             _pagedResultInfoBase = pagedResultInfoBase ?? throw new ArgumentNullException(nameof(pagedResultInfoBase));
         }
 
-        readonly IList<DistintaBrowsed> _listDistinte;
+        readonly IList<ContrattoBrowsed> _listContratti;
         readonly PagedResultInfoBase _pagedResultInfoBase;
 
-        static void CheckOfParameters(IList<DistintaBrowsed> listContratti, PagedResultInfoBase pagedResultInfoBase)
+        static void CheckOfParameters(IList<ContrattoBrowsed> listContratti, PagedResultInfoBase pagedResultInfoBase)
         {
             if (listContratti == null)
             {
@@ -56,6 +55,5 @@ namespace CCWeb.Business.Components.Browsers
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(pagedResultInfoBase));
             }
         }
-
     }
 }

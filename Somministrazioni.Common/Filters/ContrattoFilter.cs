@@ -9,7 +9,12 @@ namespace Somministrazioni.Common.Filters
 {
     public class ContrattoFilter : FilterBase
     {
-        public ContrattoFilter(String sortBy, string sortDirection, int currentPageIndex, int pageSize) : base(sortBy, sortDirection, currentPageIndex, pageSize)
+        public static ContrattoFilter Of(string sortBy, string sortDirection, int currentPageIndex, int pageSize)
+        {
+            return new ContrattoFilter(sortBy, sortDirection, currentPageIndex, pageSize);
+        }
+
+        ContrattoFilter(String sortBy, string sortDirection, int currentPageIndex, int pageSize) : base(sortBy, sortDirection, currentPageIndex, pageSize)
         {
             CheckConstructorParameter(sortBy, sortDirection);
         }
@@ -20,7 +25,6 @@ namespace Somministrazioni.Common.Filters
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(sortBy));
             }
-
             if (sortDirection == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(sortDirection));

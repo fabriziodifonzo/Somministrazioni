@@ -13,7 +13,7 @@ namespace Somministrazioni.Web.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Index(LoginModel loginModel)
+        public ActionResult Index(LoginPageModel loginModel)
         {
             return View(loginModel);
         }
@@ -34,7 +34,7 @@ namespace Somministrazioni.Web.Controllers
 
                 if (authenticationRes == AUTHENTICATION_FALSE)
                 {
-                    return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName, new LoginModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
+                    return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName, new LoginPageModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
                 }
                 PutInSession(this, idOperatore);
 

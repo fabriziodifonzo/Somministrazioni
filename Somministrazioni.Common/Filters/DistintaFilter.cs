@@ -25,7 +25,6 @@ namespace Somministrazioni.Common.Filters
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(sortBy));
             }
-
             if (sortDirection == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(sortDirection));

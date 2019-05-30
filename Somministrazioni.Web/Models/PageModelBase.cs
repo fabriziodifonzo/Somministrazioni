@@ -1,4 +1,5 @@
 ﻿using EasyMaticaSrl.Utilities.Helpers;
+using Somministrazioni.Web.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,19 @@ using System.Web;
 
 namespace Somministrazioni.Web.Models
 {
-    public abstract class ModelBase
+    public abstract class PageModelBase
     {
-        protected ModelBase(bool hasPanelInfo)
+        protected PageModelBase(bool hasPanelInfo)
         {
             _hasPanelInfo = hasPanelInfo;
         }
 
-        protected ModelBase()
+        protected PageModelBase()
         {
             _sortBy = string.Empty;
             _sortDirection = string.Empty;
+            PageSize = WebConstants.PAGESISZE_DEFAULT;
+            CurrentPageNumb = WebConstants.PAGENUMB_DEFAULT;
         }
 
         public bool HasPanelInfo
@@ -53,7 +56,7 @@ namespace Somministrazioni.Web.Models
 
         public int CurrentPageNumb
         {
-            get;set;
+            get;set;            
         }
 
 

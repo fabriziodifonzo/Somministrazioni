@@ -8,13 +8,13 @@ using System.Web;
 
 namespace Somministrazioni.Web.Models.Distinte
 {
-    public class DistinteModel : ModelBase
+    public class DistintePageModel : PageModelBase
     {
-        public DistinteModel() 
+        public DistintePageModel() 
         {
         }
 
-        public DistinteModel(string message, bool hasInfoPanel) : base(hasInfoPanel)
+        public DistintePageModel(string message, bool hasInfoPanel) : base(hasInfoPanel)
         {
             Message = message ?? throw new ArgumentNullException(nameof(message));
         }

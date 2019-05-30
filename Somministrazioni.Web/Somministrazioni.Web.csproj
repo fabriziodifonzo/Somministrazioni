@@ -155,6 +155,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\WebConstants.cs" />
+    <Compile Include="Controllers\ContrattiController.cs" />
     <Compile Include="Controllers\DistinteController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -163,9 +164,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interceptors\LoggedEFInterceptor.cs" />
-    <Compile Include="Models\Distinte\DistinteModel.cs" />
-    <Compile Include="Models\ModelBase.cs" />
-    <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Models\Contratti\ContrattiPageModel.cs" />
+    <Compile Include="Models\Distinte\DistintePageModel.cs" />
+    <Compile Include="Models\PageModelBase.cs" />
+    <Compile Include="Models\Login\LoginPageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Contratti\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

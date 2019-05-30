@@ -54,10 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Browsers\Contratti\ContrattiBrowser.cs" />
+    <Compile Include="Components\Browsers\Contratti\ContrattiBrowserFactory.cs" />
+    <Compile Include="Components\Browsers\Contratti\IContrattiBrowser.cs" />
     <Compile Include="Components\Browsers\Distinte\DistinteBrowser.cs" />
     <Compile Include="Components\Browsers\Distinte\DistinteBrowserFactory.cs" />
     <Compile Include="Components\Browsers\Distinte\IDistinteBrowser.cs" />
     <Compile Include="Components\Browsers\Models\Contratto\ContrattoBrowsed.cs" />
+    <Compile Include="Components\Browsers\Models\Contratto\ContrattoBrowsedPagedResult.cs" />
     <Compile Include="Components\Browsers\Models\Distinte\DistintaBrowsed.cs" />
     <Compile Include="Components\Browsers\Models\Distinte\DistintaBrowsedPagedResult.cs" />
     <Compile Include="Components\Browsers\PagedResultInfoBase.cs" />
