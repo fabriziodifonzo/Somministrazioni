@@ -1,6 +1,7 @@
 ﻿using log4net;
 using Somministrazioni.BusinessFacade;
 using Somministrazioni.Common.Constants;
+using Somministrazioni.Web.Constants;
 using Somministrazioni.Web.Models.Login;
 using System;
 using System.Collections.Generic;
@@ -45,13 +46,13 @@ namespace Somministrazioni.Web.Controllers
             catch (Exception e)
             {
                 _log.Info(e);
-                return RedirectToAction(GenericConstants.ACTIONNAME_ERROR_INDEX, GenericConstants.CONTROLLERNAME_ERROR);
+                return RedirectToAction(WebConstants.ACTIONNAME_ERROR_INDEX, WebConstants.CONTROLLERNAME_ERROR);
             }
         }
 
         static void PutInSession(Controller controller, string idOperatore)
         {
-            controller.Session[GenericConstants.SESSIONNAME_IDOPERATORE] = idOperatore;
+            controller.Session[WebConstants.SESSIONNAME_IDOPERATORE] = idOperatore;
         }
 
         static void CheckLoginParameters(string userName, string password)
@@ -113,7 +114,7 @@ namespace Somministrazioni.Web.Controllers
         {
             public ActionInfo SelectView()
             {
-                return ActionInfo.Of(GenericConstants.CONTROLLERNAME_LOGIN, GenericConstants.ACTIONNAME_LOGIN_INDEX);
+                return ActionInfo.Of(WebConstants.CONTROLLERNAME_LOGIN, WebConstants.ACTIONNAME_LOGIN_INDEX);
             }
         }
 
@@ -121,8 +122,7 @@ namespace Somministrazioni.Web.Controllers
         {
             public ActionInfo SelectView()
             {
-                //return ActionInfo.Of(GenericConstants.CONTROLLERNAME_APPLICATIONHOME, GenericConstants.ACTIONNAME_APPLICATIONHOME_INDEX);
-                return ActionInfo.Of(GenericConstants.CONTROLLERNAME_DISTINTE, GenericConstants.ACTIONNAME_DISTINTE_INDEX);
+                return ActionInfo.Of(WebConstants.CONTROLLERNAME_CONTRATTI, WebConstants.ACTIONNAME_DISTINTE_INDEX);
             }
         }
 

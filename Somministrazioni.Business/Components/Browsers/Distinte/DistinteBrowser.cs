@@ -1,5 +1,5 @@
 ﻿using CCWeb.Business.Components.Browsers;
-using CCWeb.Business.Components.Browsers.Models.Distinte;
+using CCWeb.Business.Components.Browsers.Models;
 using EntityFramework.DbContextScope.Interfaces;
 using Somministrazioni.Business.Components.Browsers.Models;
 using Somministrazioni.Common.Constants;
@@ -29,7 +29,7 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
             var distinteDataService = DistinteDataServiceFactory.GetInstance(_ambientDbContextLocator);
 
             var numDistinte = distinteDataService.CountDistinte(filtroRicerca);
-            var listDistinteFromDS = distinteDataService.BrowserDistinta(filtroRicerca);
+            var listDistinteFromDS = distinteDataService.BrowseDistinte(filtroRicerca);
             var listDistinteBrowsed = new List<DistintaBrowsed>();
             foreach (var distinta in listDistinteFromDS)
             {

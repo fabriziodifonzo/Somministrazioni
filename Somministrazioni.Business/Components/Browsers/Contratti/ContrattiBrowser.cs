@@ -1,7 +1,9 @@
-﻿using EntityFramework.DbContextScope.Interfaces;
+﻿using CCWeb.Business.Components.Browsers.Models;
+using EntityFramework.DbContextScope.Interfaces;
 using Somministrazioni.Business.Components.Browsers.Models.Contratto;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
+using Sommnistrazioni.Data.DataService.Contratti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,24 +25,20 @@ namespace Somministrazioni.Business.Components.Browsers.Contratti
         {
             CheckBrowseDistinteParameters(filtroRicerca);
 
-            /*
-            var distinteDataService = DistinteDataServiceFactory.GetInstance(_ambientDbContextLocator);
+            var contrattiDataService = ContrattiDataServiceFactory.GetInstance(_ambientDbContextLocator);
 
-            var numDistinte = distinteDataService.CountDistinte(filtroRicerca);
-            var listDistinteFromDS = distinteDataService.BrowserDistinta(filtroRicerca);
-            var listDistinteBrowsed = new List<DistintaBrowsed>();
-            foreach (var distinta in listDistinteFromDS)
+            var numContratti = contrattiDataService.CountDistinte(filtroRicerca);
+            var listContrattiFromDS = contrattiDataService.BrowseContratti(filtroRicerca);
+            var listContrattoBrowsed = new List<ContrattoBrowsed>();
+            foreach (var contratto in listContrattiFromDS)
             {
-                listDistinteBrowsed.Add(DistintaBrowsed.From(distinta));
+                listContrattoBrowsed.Add(ContrattoBrowsed.From(contratto));
             }
 
             var pageNumber = filtroRicerca.CurrentPageNumb;
             var pageSize = filtroRicerca.PageSize;
 
-            return DistintaBrowsedPagedResult.Of(listDistinteBrowsed, PagedResultInfoBase.Of(pageNumber, pageSize, numDistinte));
-            */
-
-            return null;
+            return ContrattoBrowsedPagedResult.Of(listContrattoBrowsed, PagedResultInfoBase.Of(pageNumber, pageSize, numContratti));            
         }
 
 

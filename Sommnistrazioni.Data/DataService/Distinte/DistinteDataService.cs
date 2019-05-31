@@ -45,25 +45,25 @@ namespace Sommnistrazioni.Data.DataService.Distinte
             _listDistinte.Add(distintaBrowsed11);
         }
 
-        public IList<DistintaBrowsed> BrowserDistinta(DistintaFilter filter)
+        public IList<DistintaBrowsed> BrowseDistinte(DistintaFilter filtroRicerca)
         {
-            CheckBrowserDistintaParameters(filter);
+            CheckBrowserDistintaParameters(filtroRicerca);
 
-            var offset = (filter.CurrentPageNumb - 1) * filter.PageSize + 1;
+            var offset = (filtroRicerca.CurrentPageNumb - 1) * filtroRicerca.PageSize + 1;
             var startIndex = offset - 1;
 
-            int ItemCount = filter.PageSize;
-            if (_listDistinte.Count - startIndex < filter.PageSize)
+            int ItemCount = filtroRicerca.PageSize;
+            if (_listDistinte.Count - startIndex < filtroRicerca.PageSize)
             {
-                ItemCount = filter.PageSize - startIndex + 1;
+                ItemCount = filtroRicerca.PageSize - startIndex + 1;
             }
 
             return _listDistinte.ToImmutableList().GetRange(startIndex, ItemCount);
         }
 
-        public int CountDistinte(DistintaFilter filter)
+        public int CountDistinte(DistintaFilter filtroRicerca)
         {
-            CheckCountDistinteParameters(filter);
+            CheckCountDistinteParameters(filtroRicerca);
 
             return _listDistinte.Count;
         }

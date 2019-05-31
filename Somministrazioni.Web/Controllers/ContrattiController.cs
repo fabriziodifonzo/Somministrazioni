@@ -1,4 +1,5 @@
-﻿using Somministrazioni.BusinessFacade;
+﻿using log4net;
+using Somministrazioni.BusinessFacade;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Web.Constants;
 using Somministrazioni.Web.Models.Contratti;
@@ -18,7 +19,7 @@ namespace Somministrazioni.Web.Controllers
         {
             _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
-            ContrattiPageModel contrattiPageModel = new ContrattiPageModel();
+            var contrattiPageModel = new ContrattiPageModel();
             var businessFacade = BusinessFacadeFactory.GetInstance();
             var contrattiBrowsedPagedResult = businessFacade.Contratti(contrattiPageModel.ToFilter());
             contrattiPageModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;

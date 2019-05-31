@@ -10,7 +10,7 @@ namespace Sommnistrazioni.Data.DataService.Distinte
 {
     public interface IDistinteDataService
     {
-        IList<DistintaBrowsed> BrowserDistinta(DistintaFilter filter);
-        int CountDistinte(DistintaFilter filter);
+        IList<DistintaBrowsed> BrowseDistinte(DistintaFilter filtroRicerca);
+        int CountDistinte(DistintaFilter filtroRicerca);
     }
 }

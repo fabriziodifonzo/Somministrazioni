@@ -64,7 +64,7 @@
     <Compile Include="Components\Browsers\Models\Contratto\ContrattoBrowsedPagedResult.cs" />
     <Compile Include="Components\Browsers\Models\Distinte\DistintaBrowsed.cs" />
     <Compile Include="Components\Browsers\Models\Distinte\DistintaBrowsedPagedResult.cs" />
-    <Compile Include="Components\Browsers\PagedResultInfoBase.cs" />
+    <Compile Include="Components\Browsers\Models\PagedResultInfoBase.cs" />
     <Compile Include="Components\Managers\IUserManager.cs" />
     <Compile Include="Components\Managers\UserManager.cs" />
     <Compile Include="Components\Managers\UserManagerBase.cs" />

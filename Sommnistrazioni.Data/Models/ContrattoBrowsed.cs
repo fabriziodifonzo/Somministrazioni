@@ -4,18 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Somministrazioni.Business.Components.Browsers.Models.Contratto
+namespace Sommnistrazioni.Data.Models
 {
     public class ContrattoBrowsed
     {
         public static ContrattoBrowsed Of(string codice)
         {
             return new ContrattoBrowsed(codice);
-        }
-
-        public static ContrattoBrowsed From(Sommnistrazioni.Data.Models.ContrattoBrowsed contrattoBrowsed)
-        {
-            return ContrattoBrowsed.Of(contrattoBrowsed.Codice);
         }
 
         public string Codice

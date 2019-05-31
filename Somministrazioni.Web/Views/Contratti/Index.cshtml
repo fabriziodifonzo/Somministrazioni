@@ -1,0 +1,35 @@
+﻿@model Somministrazioni.Web.Models.Contratti.ContrattiPageModel
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LoginLayout.cshtml";
+}
+
+<p>Contratti</p>
+@using (Html.BeginForm("Index", "Contratti", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+
+    <p>Enter the SortBy: @Html.TextBoxFor(m => m.SortBy)</p>
+    <p>Enter the Sort Direction: @Html.TextBoxFor(m => m.SortDirection)</p>
+    <p>Enter the Current Page: @Html.TextBoxFor(m => m.CurrentPageNumb)</p>
+    <p>Enter the Page Size: @Html.TextBoxFor(m => m.PageSize)</p>
+    <input type="submit" value="Submit" name="submit" class="submit" />
+
+    <div id="infoPanel">
+        <p>@Model.Message</p>
+    </div>
+
+    <table style="width:100%">
+        <tr>
+            <th>Codice</th>
+        </tr>
+        @foreach (var contrattiBrowsed in Model.ListContrattiBrowsed)
+        {
+            <tr>
+                <th>@contrattiBrowsed.Codice</th>              
+            </tr>
+        }
+    </table>
+}

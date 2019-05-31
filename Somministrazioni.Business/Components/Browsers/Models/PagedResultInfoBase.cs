@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCWeb.Business.Components.Browsers.Models.Distinte
+namespace CCWeb.Business.Components.Browsers.Models
 {
     public sealed class PagedResultInfoBase
     {

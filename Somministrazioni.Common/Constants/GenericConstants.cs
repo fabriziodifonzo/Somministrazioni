@@ -19,24 +19,6 @@ namespace Somministrazioni.Common.Constants
         public const string ERRMSG_INVALIDLOGIN = "Errore nell'autenticazione";
         public const string ERRMSG_PRECONDICTION = "Precondizione violata";
 
-        //--- Controller Names ----
-
-        public const string CONTROLLERNAME_APPLICATIONHOME = "Home";
-        public const string CONTROLLERNAME_LOGIN = "Login";
-        public const string CONTROLLERNAME_ERROR = "Error";
-        public const string CONTROLLERNAME_DISTINTE = "Distinte";
-
-        //--- Action names ---
-
-        public const string ACTIONNAME_APPLICATIONHOME_INDEX = "Index";
-        public const string ACTIONNAME_LOGIN_INDEX = "Index";
-        public const string ACTIONNAME_ERROR_INDEX = "Index";
-        public const string ACTIONNAME_DISTINTE_INDEX = "Index";
-
-        //--- Session Names ----
-
-        public const string SESSIONNAME_IDOPERATORE = "idoperatore";
-
         //---- Log4Net appenders ------
 
         public const string QUERY_APPENDER = "Query";

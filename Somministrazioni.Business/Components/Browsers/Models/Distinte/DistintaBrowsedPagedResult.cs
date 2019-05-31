@@ -1,4 +1,4 @@
-﻿using CCWeb.Business.Components.Browsers.Models.Distinte;
+﻿using CCWeb.Business.Components.Browsers.Models;
 using Somministrazioni.Business.Components.Browsers.Models;
 using Somministrazioni.Common.Constants;
 using System;

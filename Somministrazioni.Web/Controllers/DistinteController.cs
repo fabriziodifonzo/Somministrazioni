@@ -19,7 +19,7 @@ namespace Somministrazioni.Web.Controllers
         {
             _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
-            DistintePageModel distintePageModel = new DistintePageModel();
+            var distintePageModel = new DistintePageModel();
             var businessFacade = BusinessFacadeFactory.GetInstance();
             var distinteBrowsedPagedResult = businessFacade.Distinte(distintePageModel.ToFilter());
             distintePageModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
