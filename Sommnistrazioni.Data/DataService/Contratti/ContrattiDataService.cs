@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sommnistrazioni.Data.DataService.Distinte
+namespace Sommnistrazioni.Data.DataService.Contratti
 {
     public class ContrattiDataService : IContrattiDataService
     {
@@ -21,17 +21,17 @@ namespace Sommnistrazioni.Data.DataService.Distinte
             _ambientDbContextLocator = ambientDbContextLocator;
 
             _listContratti = new List<ContrattoBrowsed>();
-            var contrattoBrowsed1 = ContrattoBrowsed.Of("CodDistinta1");
-            var contrattoBrowsed2 = ContrattoBrowsed.Of("CodDistinta2");
-            var contrattoBrowsed3 = ContrattoBrowsed.Of("CodDistinta3");
-            var contrattoBrowsed4 = ContrattoBrowsed.Of("CodDistinta4");
-            var contrattoBrowsed5 = ContrattoBrowsed.Of("CodDistinta5");
-            var contrattoBrowsed6 = ContrattoBrowsed.Of("CodDistinta6");
-            var contrattoBrowsed7 = ContrattoBrowsed.Of("CodDistinta7");
-            var contrattoBrowsed8 = ContrattoBrowsed.Of("CodDistinta8");
-            var contrattoBrowsed9 = ContrattoBrowsed.Of("CodDistinta9");
-            var contrattoBrowsed10 = ContrattoBrowsed.Of("CodDistinta10");
-            var contrattoBrowsed11 = ContrattoBrowsed.Of("CodDistinta11");
+            var contrattoBrowsed1 = ContrattoBrowsed.Of("CodContratto1");
+            var contrattoBrowsed2 = ContrattoBrowsed.Of("CodContratto2");
+            var contrattoBrowsed3 = ContrattoBrowsed.Of("CodContratto3");
+            var contrattoBrowsed4 = ContrattoBrowsed.Of("CodContratto4");
+            var contrattoBrowsed5 = ContrattoBrowsed.Of("CodContratto5");
+            var contrattoBrowsed6 = ContrattoBrowsed.Of("CodContratto6");
+            var contrattoBrowsed7 = ContrattoBrowsed.Of("CodContratto7");
+            var contrattoBrowsed8 = ContrattoBrowsed.Of("CodContratto8");
+            var contrattoBrowsed9 = ContrattoBrowsed.Of("CodContratto9");
+            var contrattoBrowsed10 = ContrattoBrowsed.Of("CodContratto10");
+            var contrattoBrowsed11 = ContrattoBrowsed.Of("CodContratto11");
 
             _listContratti.Add(contrattoBrowsed1);
             _listContratti.Add(contrattoBrowsed2);
@@ -48,7 +48,7 @@ namespace Sommnistrazioni.Data.DataService.Distinte
 
         public IList<ContrattoBrowsed> BrowseContratti(ContrattoFilter filtroRicerca)
         {
-            CheckBrowserDistintaParameters(filtroRicerca);
+            CheckBrowserContrattoParameters(filtroRicerca);
 
             var offset = (filtroRicerca.CurrentPageNumb - 1) * filtroRicerca.PageSize + 1;
             var startIndex = offset - 1;
@@ -80,7 +80,7 @@ namespace Sommnistrazioni.Data.DataService.Distinte
             }
         }
 
-        static void CheckBrowserDistintaParameters(ContrattoFilter filtroRicerca)
+        static void CheckBrowserContrattoParameters(ContrattoFilter filtroRicerca)
         {
             if (filtroRicerca == null)
             {

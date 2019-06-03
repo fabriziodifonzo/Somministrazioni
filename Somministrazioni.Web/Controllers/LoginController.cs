@@ -14,9 +14,12 @@ namespace Somministrazioni.Web.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Index(LoginPageModel loginModel)
+        [HttpGet]
+        public ActionResult Index()
         {
-            return View(loginModel);
+            var loginPageModel = new LoginPageModel();
+
+            return View(loginPageModel);
         }
 
         [HttpPost]
@@ -122,7 +125,7 @@ namespace Somministrazioni.Web.Controllers
         {
             public ActionInfo SelectView()
             {
-                return ActionInfo.Of(WebConstants.CONTROLLERNAME_CONTRATTI, WebConstants.ACTIONNAME_DISTINTE_INDEX);
+                return ActionInfo.Of(WebConstants.CONTROLLERNAME_APPLICATIONHOME, WebConstants.ACTIONNAME_APPLICATIONHOME_INDEX);
             }
         }
 

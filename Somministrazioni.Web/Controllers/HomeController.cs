@@ -1,6 +1,10 @@
-﻿using System;
+﻿using log4net;
+using Somministrazioni.Common.Constants;
+using Somministrazioni.Web.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,8 +12,13 @@ namespace Somministrazioni.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
+            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+
+            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+
             return View();
         }
 
@@ -26,5 +35,8 @@ namespace Somministrazioni.Web.Controllers
 
             return View();
         }
+
+        readonly ILog _log = log4net.LogManager.GetLogger(typeof(HomeController));
+
     }
 }

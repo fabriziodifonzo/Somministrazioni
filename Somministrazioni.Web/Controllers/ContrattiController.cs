@@ -45,6 +45,6 @@ namespace Somministrazioni.Web.Controllers
             return View(contrattiModel);
         }
 
-        readonly ILog _log = log4net.LogManager.GetLogger(typeof(LoginController));
+        readonly ILog _log = log4net.LogManager.GetLogger(typeof(ContrattiController));
     }
 }
