@@ -14,17 +14,22 @@ namespace Somministrazioni.Web.Controllers
 {
     public class ContrattiController : Controller
     {
+        public ContrattiController(ILog log, IBusinessFacade businessFacade)
+        {
+            _log = log;
+            _businessFacade = businessFacade;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
-            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
             var contrattiPageModel = new ContrattiPageModel();
-            var businessFacade = BusinessFacadeFactory.GetInstance();
-            var contrattiBrowsedPagedResult = businessFacade.Contratti(contrattiPageModel.ToFilter());
+            var contrattiBrowsedPagedResult = _businessFacade.Contratti(contrattiPageModel.ToFilter());
             contrattiPageModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;
 
-            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(contrattiPageModel);
         }
@@ -33,18 +38,18 @@ namespace Somministrazioni.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(ContrattiPageModel contrattiModel)
         {
-            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_POST).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
-            var businessFacade = BusinessFacadeFactory.GetInstance();
-            var contrattiBrowsedPagedResult = businessFacade.Contratti(contrattiModel.ToFilter());
+            var contrattiBrowsedPagedResult = _businessFacade.Contratti(contrattiModel.ToFilter());
 
             contrattiModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;
 
-            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_POST).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(contrattiModel);
         }
 
-        readonly ILog _log = log4net.LogManager.GetLogger(typeof(ContrattiController));
+        readonly IBusinessFacade _businessFacade;
+        readonly ILog _log;
     }
 }

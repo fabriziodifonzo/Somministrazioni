@@ -15,23 +15,9 @@ namespace Somministrazioni.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
-            _log.Info((new StringBuilder(nameof(Index))).Append(GenericConstants.CHR_SPACE).Append(WebConstants.HTTPMETHODTYPE_GET).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
             return View();
         }

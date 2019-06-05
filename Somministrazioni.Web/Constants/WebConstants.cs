@@ -15,7 +15,7 @@ namespace Somministrazioni.Web.Constants
         //----- Web method types -----
 
         public const string HTTPMETHODTYPE_GET = "GET";
-        public const string HTTPMETHODTYPE_POST = "SET";
+        public const string HTTPMETHODTYPE_POST = "POST";
 
         //--- Controller Names ----
 

@@ -40,6 +40,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
@@ -55,10 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Browsers\Contratti\ContrattiBrowser.cs" />
-    <Compile Include="Components\Browsers\Contratti\ContrattiBrowserFactory.cs" />
     <Compile Include="Components\Browsers\Contratti\IContrattiBrowser.cs" />
     <Compile Include="Components\Browsers\Distinte\DistinteBrowser.cs" />
-    <Compile Include="Components\Browsers\Distinte\DistinteBrowserFactory.cs" />
     <Compile Include="Components\Browsers\Distinte\IDistinteBrowser.cs" />
     <Compile Include="Components\Browsers\Models\Contratto\ContrattoBrowsed.cs" />
     <Compile Include="Components\Browsers\Models\Contratto\ContrattoBrowsedPagedResult.cs" />

@@ -1,6 +1,7 @@
 ﻿using CCWeb.Business.Components.Browsers;
 using CCWeb.Business.Components.Browsers.Models;
 using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Business.Components.Browsers.Models;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
@@ -15,21 +16,21 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
 {
     public class DistinteBrowser : IDistinteBrowser
     {
-        public DistinteBrowser(IAmbientDbContextLocator ambientDbContextLocator)
+        public DistinteBrowser(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IDistinteDataService distinteDataService)
         {
-            CheckConstructorParameters(ambientDbContextLocator);
+            CheckConstructorParameters(log, ambientDbContextLocator, distinteDataService);
 
             _ambientDbContextLocator = ambientDbContextLocator;
+            _log = log;
+            _distinteDataService = distinteDataService;
         }
 
         public DistintaBrowsedPagedResult BrowseDistinte(DistintaFilter filtroRicerca)
         {
             CheckBrowseDistinteParameters(filtroRicerca);
 
-            var distinteDataService = DistinteDataServiceFactory.GetInstance(_ambientDbContextLocator);
-
-            var numDistinte = distinteDataService.CountDistinte(filtroRicerca);
-            var listDistinteFromDS = distinteDataService.BrowseDistinte(filtroRicerca);
+            var numDistinte = _distinteDataService.CountDistinte(filtroRicerca);
+            var listDistinteFromDS = _distinteDataService.BrowseDistinte(filtroRicerca);
             var listDistinteBrowsed = new List<DistintaBrowsed>();
             foreach (var distinta in listDistinteFromDS)
             {
@@ -43,12 +44,22 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
         }
 
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
+        readonly ILog _log;
+        readonly IDistinteDataService _distinteDataService;
 
-        static void CheckConstructorParameters(IAmbientDbContextLocator ambientDbContextLocator)
+        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IDistinteDataService distinteDataService)
         {
+            if (log == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
+            }
             if (ambientDbContextLocator == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
+            }
+            if (distinteDataService == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(distinteDataService));
             }
         }
 

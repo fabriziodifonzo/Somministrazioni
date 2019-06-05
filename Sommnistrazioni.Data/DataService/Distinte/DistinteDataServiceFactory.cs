@@ -1,4 +1,5 @@
 ﻿using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Common.Constants;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace Sommnistrazioni.Data.DataService.Distinte
 {
     public static class DistinteDataServiceFactory
     {
-        public static IDistinteDataService GetInstance(IAmbientDbContextLocator ambientDbContextLocator)
+        public static IDistinteDataService GetInstance(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
         {
             CheckGetInstanceParamets(ambientDbContextLocator);
 
-            return new DistinteDataService(ambientDbContextLocator);
+            return new DistinteDataService(log, ambientDbContextLocator);
         }
 
         public static void CheckGetInstanceParamets(IAmbientDbContextLocator ambientDbContextLocator)

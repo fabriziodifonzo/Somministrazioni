@@ -1,4 +1,5 @@
 ﻿using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
 using Sommnistrazioni.Data.DataService.Contratti;
@@ -14,9 +15,9 @@ namespace Sommnistrazioni.Data.DataService.Contratti
 {
     public class ContrattiDataService : IContrattiDataService
     {
-        public ContrattiDataService(IAmbientDbContextLocator ambientDbContextLocator)
+        public ContrattiDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
         {
-            CheckConstructorParameters(ambientDbContextLocator);
+            CheckConstructorParameters(log, ambientDbContextLocator);
 
             _ambientDbContextLocator = ambientDbContextLocator;
 
@@ -69,11 +70,16 @@ namespace Sommnistrazioni.Data.DataService.Contratti
             return _listContratti.Count;
         }
 
+        readonly ILog _log;
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
         readonly IList<ContrattoBrowsed> _listContratti;
 
-        static void CheckConstructorParameters(IAmbientDbContextLocator ambientDbContextLocator)
+        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
         {
+            if (log == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
+            }
             if (ambientDbContextLocator == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));

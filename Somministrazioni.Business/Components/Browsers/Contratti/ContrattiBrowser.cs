@@ -1,5 +1,6 @@
 ﻿using CCWeb.Business.Components.Browsers.Models;
 using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Business.Components.Browsers.Models.Contratto;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
@@ -14,21 +15,21 @@ namespace Somministrazioni.Business.Components.Browsers.Contratti
 {
     public class ContrattiBrowser : IContrattiBrowser
     {
-        public ContrattiBrowser(IAmbientDbContextLocator ambientDbContextLocator)
+        public ContrattiBrowser(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IContrattiDataService contrattiDataService)
         {
-            CheckConstructorParameters(ambientDbContextLocator);
+            CheckConstructorParameters(log, ambientDbContextLocator, contrattiDataService);
 
+            _log = log;
             _ambientDbContextLocator = ambientDbContextLocator;
+            _contrattiDataService = contrattiDataService;
         }
 
         public ContrattoBrowsedPagedResult BrowseContratti(ContrattoFilter filtroRicerca)
         {
             CheckBrowseDistinteParameters(filtroRicerca);
 
-            var contrattiDataService = ContrattiDataServiceFactory.GetInstance(_ambientDbContextLocator);
-
-            var numContratti = contrattiDataService.CountDistinte(filtroRicerca);
-            var listContrattiFromDS = contrattiDataService.BrowseContratti(filtroRicerca);
+            var numContratti = _contrattiDataService.CountDistinte(filtroRicerca);
+            var listContrattiFromDS = _contrattiDataService.BrowseContratti(filtroRicerca);
             var listContrattoBrowsed = new List<ContrattoBrowsed>();
             foreach (var contratto in listContrattiFromDS)
             {
@@ -43,12 +44,22 @@ namespace Somministrazioni.Business.Components.Browsers.Contratti
 
 
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
+        readonly ILog _log;
+        readonly IContrattiDataService _contrattiDataService;
 
-        static void CheckConstructorParameters(IAmbientDbContextLocator ambientDbContextLocator)
+        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IContrattiDataService contrattiDataService)
         {
+            if (log == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
+            }
             if (ambientDbContextLocator == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
+            }
+            if (contrattiDataService == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(contrattiDataService));
             }
         }
 

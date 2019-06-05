@@ -14,10 +14,20 @@ namespace Somministrazioni.Web.Controllers
 {
     public class LoginController : Controller
     {
+        public LoginController(ILog log, IBusinessFacade businessFacade)
+        {
+            _log = log;
+            _businessFacade = businessFacade;
+        }
+       
         [HttpGet]
         public ActionResult Index()
         {
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+
             var loginPageModel = new LoginPageModel();
+
+            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(loginPageModel);
         }
@@ -30,10 +40,9 @@ namespace Somministrazioni.Web.Controllers
             {
                 CheckLoginParameters(userName, password);
 
-                _log.Info((new StringBuilder(nameof(Login))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
+                _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
-                var businessFacade = BusinessFacadeFactory.GetInstance();
-                var authenticationRes = businessFacade.TryAuthenticateUser(userName, password, out string idOperatore);
+                var authenticationRes = _businessFacade.TryAuthenticateUser(userName, password, out string idOperatore);
                 var actionInfo = ViewSelectorFactory.GetInstance(authenticationRes).SelectView();
 
                 if (authenticationRes == AUTHENTICATION_FALSE)
@@ -42,7 +51,7 @@ namespace Somministrazioni.Web.Controllers
                 }
                 PutInSession(this, idOperatore);
 
-                _log.Info((new StringBuilder(nameof(Login))).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
+                _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
                 return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName);
             }
@@ -52,6 +61,12 @@ namespace Somministrazioni.Web.Controllers
                 return RedirectToAction(WebConstants.ACTIONNAME_ERROR_INDEX, WebConstants.CONTROLLERNAME_ERROR);
             }
         }
+
+        readonly ILog _log;
+        readonly IBusinessFacade _businessFacade;
+        readonly static bool AUTHENTICATION_TRUE = true;
+        static readonly bool AUTHENTICATION_FALSE = false;
+
 
         static void PutInSession(Controller controller, string idOperatore)
         {
@@ -69,10 +84,6 @@ namespace Somministrazioni.Web.Controllers
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLOREMPTYARGUMENT + GenericConstants.CHR_SPACE + nameof(password));
             }
         }
-
-        readonly ILog _log = log4net.LogManager.GetLogger(typeof(LoginController));
-        readonly static bool AUTHENTICATION_TRUE = true;
-        static readonly bool AUTHENTICATION_FALSE = false;
 
         class ActionInfo
         {
@@ -141,7 +152,6 @@ namespace Somministrazioni.Web.Controllers
                 {
                     return new LoginViewSelector();
                 }
-
             }
         }
     }

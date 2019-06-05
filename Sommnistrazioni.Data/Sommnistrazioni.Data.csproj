@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataService\Contratti\ContrattiDataService.cs" />
-    <Compile Include="DataService\Contratti\ContrattiDataServiceFactory.cs" />
     <Compile Include="DataService\Contratti\IContrattiDataService..cs" />
     <Compile Include="DataService\DataServiceBase.cs" />
     <Compile Include="DataService\Distinte\DistinteDataService.cs" />

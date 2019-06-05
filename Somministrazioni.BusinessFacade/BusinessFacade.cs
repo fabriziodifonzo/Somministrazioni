@@ -1,6 +1,7 @@
 ﻿using CCWeb.Business.Components.Browsers;
 using EntityFramework.DbContextScope;
 using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Business.Components.Browsers.Contratti;
 using Somministrazioni.Business.Components.Browsers.Distinte;
 using Somministrazioni.Business.Components.Browsers.Models;
@@ -18,9 +19,12 @@ namespace Somministrazioni.BusinessFacade
 {
     public sealed class BusinessFacade : IBusinessFacade
     {
-        public BusinessFacade()
+        public BusinessFacade(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IDistinteBrowser distinteBrowser, IContrattiBrowser contrattiBrowser)
         {
-            _ambientDbContextLocator = new AmbientDbContextLocator();
+            _log = log;
+            _ambientDbContextLocator = ambientDbContextLocator;
+            _distinteBrowser = distinteBrowser;
+            _contrattiBrowser = contrattiBrowser;
         }
 
         public bool TryAuthenticateUser(string userName, string password, out string idOperatore)
@@ -35,19 +39,15 @@ namespace Somministrazioni.BusinessFacade
         public DistintaBrowsedPagedResult Distinte(DistintaFilter filtroRicerca)
         {
             CheckDistinteParameters(filtroRicerca);
-
-            var distinteBrowser = DistinteBrowserFactory.GetInstance(_ambientDbContextLocator);
-
-            return distinteBrowser.BrowseDistinte(filtroRicerca);
+            
+            return _distinteBrowser.BrowseDistinte(filtroRicerca);
         }
 
         public ContrattoBrowsedPagedResult Contratti(ContrattoFilter filtroRicerca)
         {
             CheckContrattiParameters(filtroRicerca);
 
-            var contrattiBrowser = ContrattiBrowserFactory.GetInstance(_ambientDbContextLocator);
-
-            return contrattiBrowser.BrowseContratti(filtroRicerca);
+            return _contrattiBrowser.BrowseContratti(filtroRicerca);
         }
 
         static void CheckTryAuthenticateUserParameter(string userName, string password)
@@ -79,6 +79,9 @@ namespace Somministrazioni.BusinessFacade
 
         }
 
+        readonly ILog _log;
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
+        readonly IDistinteBrowser _distinteBrowser;
+        readonly IContrattiBrowser _contrattiBrowser;
     }
 }

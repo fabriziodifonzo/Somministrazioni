@@ -1,4 +1,5 @@
 ﻿using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
 using Sommnistrazioni.Data.Models;
@@ -13,10 +14,11 @@ namespace Sommnistrazioni.Data.DataService.Distinte
 {
     public class DistinteDataService : IDistinteDataService
     {
-        public DistinteDataService(IAmbientDbContextLocator ambientDbContextLocator)
+        public DistinteDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
         {
-            CheckConstructorParameters(ambientDbContextLocator);
+            CheckConstructorParameters(log, ambientDbContextLocator);
 
+            _log = log;
             _ambientDbContextLocator = ambientDbContextLocator;
 
             _listDistinte = new List<DistintaBrowsed>();
@@ -68,13 +70,18 @@ namespace Sommnistrazioni.Data.DataService.Distinte
             return _listDistinte.Count;
         }
 
+        readonly ILog _log;
         readonly IAmbientDbContextLocator _ambientDbContextLocator;
         readonly IList<DistintaBrowsed> _listDistinte;
 
-        static void CheckConstructorParameters(IAmbientDbContextLocator ambientDbContextLocator)
+        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
         {
-            if (ambientDbContextLocator == null)
+            if (log == null)
             {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
+            }
+            if (ambientDbContextLocator == null)
+            { 
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
             }
         }

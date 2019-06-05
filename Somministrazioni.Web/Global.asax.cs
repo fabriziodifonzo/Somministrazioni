@@ -1,4 +1,5 @@
-﻿using Somministrazioni.Web.Interceptors;
+﻿using Somministrazioni.Web.App_Start;
+using Somministrazioni.Web.Interceptors;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure.Interception;
@@ -16,6 +17,8 @@ namespace Somministrazioni.Web
         {
             log4net.Config.XmlConfigurator.Configure();
             DbInterception.Add(new LoggedEFInterceptor());
+
+            AutofacConfig.ConfigureContainer();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
