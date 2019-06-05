@@ -29,6 +29,7 @@ namespace Somministrazioni.Web.Controllers
             var distinteBrowsedPagedResult = _businessFacade.Distinte(distintePageModel.ToFilter());
             distintePageModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
 
+
             _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(distintePageModel);
@@ -43,6 +44,7 @@ namespace Somministrazioni.Web.Controllers
             var distinteBrowsedPagedResult = _businessFacade.Distinte(distinteModel.ToFilter());
 
             distinteModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
+            _log.Info(WebConstants.INFOMSG_SHOWDATA);
 
             _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 

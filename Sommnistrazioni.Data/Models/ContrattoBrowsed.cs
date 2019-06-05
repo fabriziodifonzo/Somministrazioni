@@ -21,6 +21,20 @@ namespace Sommnistrazioni.Data.Models
             }
         }
 
+        public override string ToString()
+        {
+            var toStringBuilder = new StringBuilder();
+
+            toStringBuilder.Append("[ ");
+            toStringBuilder.Append("Codice: ");
+            toStringBuilder.Append(" = ");
+            toStringBuilder.Append(_codice);
+            toStringBuilder.Append(" ]");
+
+            return toStringBuilder.ToString();
+        }
+
+
         ContrattoBrowsed(string codice)
         {
             _codice = codice;

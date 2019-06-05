@@ -7,6 +7,10 @@ namespace Somministrazioni.Web.Constants
 {
     public static class WebConstants
     {
+        //---- Info message ----
+
+        public const string INFOMSG_SHOWDATA = "Returning HTML page showing data";
+
         //----- Pages -----
 
         public const int PAGESISZE_DEFAULT = 10;

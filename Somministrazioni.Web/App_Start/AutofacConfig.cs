@@ -32,6 +32,7 @@ namespace Somministrazioni.Web.App_Start
 
             builder.RegisterModule(new AmbientDBContextLocatorModule());            
             builder.RegisterModule(new AutofacLoggingModule());
+            builder.RegisterModule(new LogInterceptorModule());
 
             //Users
             builder.RegisterModule(new UsersManagerModule());
@@ -63,14 +64,31 @@ namespace Somministrazioni.Web.App_Start
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
+        class LogInterceptorModule : Autofac.Module
+        {
+            protected override void Load(ContainerBuilder builder)
+            {
+                builder.RegisterType<LoggedMvcInterceptor>()
+                    .WithParameter(new ResolvedParameter
+                                    (
+                                        (param, ctx) => param.ParameterType == typeof(ILog),
+                                        (param, ctx) => LogManager.GetLogger(param.Member.DeclaringType)
+                                     )
+                                )
+                    .InstancePerRequest();
+            }
+        }
+
         class UsersDataServiceModule : Autofac.Module
         {
             protected override void Load(ContainerBuilder builder)
             {
-                builder.RegisterType<UsersDataService>()
-                    .AsImplementedInterfaces()
-                    .InstancePerRequest();
-            }
+                    builder.RegisterType<UsersDataService>()
+                        .AsImplementedInterfaces()
+                        .InstancePerRequest()
+                        .EnableInterfaceInterceptors()
+                        .InterceptedBy(typeof(LoggedMvcInterceptor));                    
+            }            
         }
 
         class UsersManagerModule : Autofac.Module
@@ -79,7 +97,9 @@ namespace Somministrazioni.Web.App_Start
             {
                 builder.RegisterType<UsersManager>()
                     .AsImplementedInterfaces()
-                    .InstancePerRequest();
+                    .InstancePerRequest()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(typeof(LoggedMvcInterceptor));
             }
         }
 
@@ -89,7 +109,9 @@ namespace Somministrazioni.Web.App_Start
             {
                 builder.RegisterType<DistinteDataService>()
                     .AsImplementedInterfaces()
-                    .InstancePerRequest();
+                    .InstancePerRequest()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(typeof(LoggedMvcInterceptor));            
             }
         }
 
@@ -99,7 +121,10 @@ namespace Somministrazioni.Web.App_Start
             {
                 builder.RegisterType<DistinteBrowser>()
                     .AsImplementedInterfaces()
-                    .InstancePerRequest();
+                    .InstancePerRequest()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(typeof(LoggedMvcInterceptor));
+
             }
         }
 
@@ -109,7 +134,10 @@ namespace Somministrazioni.Web.App_Start
             {
                 builder.RegisterType<ContrattiBrowser>()
                     .AsImplementedInterfaces()
-                    .InstancePerRequest();
+                    .InstancePerRequest()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(typeof(LoggedMvcInterceptor));
+
             }
         }
 
@@ -119,7 +147,10 @@ namespace Somministrazioni.Web.App_Start
             {
                 builder.RegisterType<ContrattiDataService>()
                     .AsImplementedInterfaces()
-                    .InstancePerRequest();
+                    .InstancePerRequest()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(typeof(LoggedMvcInterceptor));
+
             }
         }
 
@@ -139,7 +170,10 @@ namespace Somministrazioni.Web.App_Start
             {
                 builder.RegisterType<BusinessFacade.BusinessFacade>()
                     .AsImplementedInterfaces()
-                    .InstancePerRequest();
+                    .InstancePerRequest()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(typeof(LoggedMvcInterceptor));
+                ;
             }
         }
 
@@ -157,8 +191,8 @@ namespace Somministrazioni.Web.App_Start
                   new[]
                   {
                     new ResolvedParameter(
-                        (p, i) => p.ParameterType == typeof(ILog),
-                        (p, i) => LogManager.GetLogger(p.Member.DeclaringType)
+                        (param, ctx) => param.ParameterType == typeof(ILog),
+                        (param, ctx) => LogManager.GetLogger(param.Member.DeclaringType)
                     )
                   });
             }

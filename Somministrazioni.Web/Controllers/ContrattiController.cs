@@ -28,6 +28,7 @@ namespace Somministrazioni.Web.Controllers
             var contrattiPageModel = new ContrattiPageModel();
             var contrattiBrowsedPagedResult = _businessFacade.Contratti(contrattiPageModel.ToFilter());
             contrattiPageModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;
+            _log.Info(WebConstants.INFOMSG_SHOWDATA);
 
             _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
@@ -43,6 +44,7 @@ namespace Somministrazioni.Web.Controllers
             var contrattiBrowsedPagedResult = _businessFacade.Contratti(contrattiModel.ToFilter());
 
             contrattiModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;
+            _log.Info(WebConstants.INFOMSG_SHOWDATA);
 
             _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 

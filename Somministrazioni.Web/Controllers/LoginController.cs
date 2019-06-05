@@ -26,6 +26,7 @@ namespace Somministrazioni.Web.Controllers
             _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
             var loginPageModel = new LoginPageModel();
+            _log.Info(WebConstants.INFOMSG_SHOWDATA);            
 
             _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 

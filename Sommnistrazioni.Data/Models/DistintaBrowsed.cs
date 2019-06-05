@@ -1,4 +1,5 @@
-﻿using Somministrazioni.Common.Enums;
+﻿using Somministrazioni.Common.Constants;
+using Somministrazioni.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Sommnistrazioni.Data.Models
             return new DistintaBrowsed(codice, statoDistinta);
         }
 
-        public string Codice 
+        public string Codice
         {
             get
             {
@@ -28,6 +29,24 @@ namespace Sommnistrazioni.Data.Models
             {
                 return _statoDistinta;
             }
+        }
+
+        public override string ToString()
+        {
+            var toStringBuilder = new StringBuilder();
+
+            toStringBuilder.Append("[ ");
+            toStringBuilder.Append("Codice: ");
+            toStringBuilder.Append(" = ");
+            toStringBuilder.Append(_codice);
+            toStringBuilder.Append(",");
+            toStringBuilder.Append("Stato: ");
+            toStringBuilder.Append(" = ");
+            toStringBuilder.Append(_statoDistinta);
+            toStringBuilder.Append(",");
+            toStringBuilder.Append(" ]");
+
+            return toStringBuilder.ToString();
         }
 
         DistintaBrowsed(string codice, StatoDistinta statoDistinta)

@@ -27,7 +27,7 @@ namespace Somministrazioni.Web.Interceptors
             watch.Stop();
             var executionTime = watch.ElapsedMilliseconds;
 
-            _log.Info($"Done: result was {invocation.ReturnValue}");
+            _log.Info($"Done ({name}): result was {invocation.ReturnValue}");
             _log.Info($"Execution Time: {executionTime} ms.");
           
         }
