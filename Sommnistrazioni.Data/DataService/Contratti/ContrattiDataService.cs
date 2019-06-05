@@ -2,6 +2,7 @@
 using log4net;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Common.Filters;
+using Sommnistrazioni.Data.DataService;
 using Sommnistrazioni.Data.DataService.Contratti;
 using Sommnistrazioni.Data.Models;
 using System;
@@ -11,15 +12,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sommnistrazioni.Data.DataService.Contratti
+namespace Somministrazioni.Data.DataService.Contratti
 {
-    public class ContrattiDataService : IContrattiDataService
+    public class ContrattiDataService : DataServiceBase, IContrattiDataService
     {
-        public ContrattiDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
+        public ContrattiDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
         {
             CheckConstructorParameters(log, ambientDbContextLocator);
-
-            _ambientDbContextLocator = ambientDbContextLocator;
 
             _listContratti = new List<ContrattoBrowsed>();
             var contrattoBrowsed1 = ContrattoBrowsed.Of("CodContratto1");
@@ -71,7 +70,6 @@ namespace Sommnistrazioni.Data.DataService.Contratti
         }
 
         readonly ILog _log;
-        readonly IAmbientDbContextLocator _ambientDbContextLocator;
         readonly IList<ContrattoBrowsed> _listContratti;
 
         static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator)

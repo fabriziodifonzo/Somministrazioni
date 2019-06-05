@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 
 namespace Sommnistrazioni.Data.DataService.Distinte
 {
-    public class DistinteDataService : IDistinteDataService
+    public class DistinteDataService : DataServiceBase, IDistinteDataService
     {
-        public DistinteDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
+        public DistinteDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
         {
             CheckConstructorParameters(log, ambientDbContextLocator);
 
             _log = log;
-            _ambientDbContextLocator = ambientDbContextLocator;
 
             _listDistinte = new List<DistintaBrowsed>();
             var distintaBrowsed1 = DistintaBrowsed.Of("CodDistinta1", Somministrazioni.Common.Enums.StatoDistinta.Pianificata);
@@ -71,7 +70,6 @@ namespace Sommnistrazioni.Data.DataService.Distinte
         }
 
         readonly ILog _log;
-        readonly IAmbientDbContextLocator _ambientDbContextLocator;
         readonly IList<DistintaBrowsed> _listDistinte;
 
         static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator)

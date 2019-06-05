@@ -16,11 +16,10 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
 {
     public class DistinteBrowser : IDistinteBrowser
     {
-        public DistinteBrowser(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IDistinteDataService distinteDataService)
+        public DistinteBrowser(ILog log, IDistinteDataService distinteDataService)
         {
-            CheckConstructorParameters(log, ambientDbContextLocator, distinteDataService);
+            CheckConstructorParameters(log, distinteDataService);
 
-            _ambientDbContextLocator = ambientDbContextLocator;
             _log = log;
             _distinteDataService = distinteDataService;
         }
@@ -43,19 +42,14 @@ namespace Somministrazioni.Business.Components.Browsers.Distinte
             return DistintaBrowsedPagedResult.Of(listDistinteBrowsed, PagedResultInfoBase.Of(pageNumber, pageSize, numDistinte));
         }
 
-        readonly IAmbientDbContextLocator _ambientDbContextLocator;
         readonly ILog _log;
         readonly IDistinteDataService _distinteDataService;
 
-        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IDistinteDataService distinteDataService)
+        static void CheckConstructorParameters(ILog log, IDistinteDataService distinteDataService)
         {
             if (log == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
-            }
-            if (ambientDbContextLocator == null)
-            {
-                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
             }
             if (distinteDataService == null)
             {

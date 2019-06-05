@@ -66,10 +66,8 @@
     <Compile Include="Components\Browsers\Models\Distinte\DistintaBrowsed.cs" />
     <Compile Include="Components\Browsers\Models\Distinte\DistintaBrowsedPagedResult.cs" />
     <Compile Include="Components\Browsers\Models\PagedResultInfoBase.cs" />
-    <Compile Include="Components\Managers\IUserManager.cs" />
-    <Compile Include="Components\Managers\UserManager.cs" />
-    <Compile Include="Components\Managers\UserManagerBase.cs" />
-    <Compile Include="Components\Managers\UserManagerFactory.cs" />
+    <Compile Include="Components\Managers\Users\IUsersManager.cs" />
+    <Compile Include="Components\Managers\Users\UsersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

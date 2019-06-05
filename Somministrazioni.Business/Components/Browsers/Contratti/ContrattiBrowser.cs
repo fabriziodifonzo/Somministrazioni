@@ -15,12 +15,11 @@ namespace Somministrazioni.Business.Components.Browsers.Contratti
 {
     public class ContrattiBrowser : IContrattiBrowser
     {
-        public ContrattiBrowser(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IContrattiDataService contrattiDataService)
+        public ContrattiBrowser(ILog log, IContrattiDataService contrattiDataService)
         {
-            CheckConstructorParameters(log, ambientDbContextLocator, contrattiDataService);
+            CheckConstructorParameters(log, contrattiDataService);
 
             _log = log;
-            _ambientDbContextLocator = ambientDbContextLocator;
             _contrattiDataService = contrattiDataService;
         }
 
@@ -43,19 +42,14 @@ namespace Somministrazioni.Business.Components.Browsers.Contratti
         }
 
 
-        readonly IAmbientDbContextLocator _ambientDbContextLocator;
         readonly ILog _log;
         readonly IContrattiDataService _contrattiDataService;
 
-        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator, IContrattiDataService contrattiDataService)
+        static void CheckConstructorParameters(ILog log, IContrattiDataService contrattiDataService)
         {
             if (log == null)
             {
                 throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
-            }
-            if (ambientDbContextLocator == null)
-            {
-                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
             }
             if (contrattiDataService == null)
             {

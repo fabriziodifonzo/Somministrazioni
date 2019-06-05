@@ -67,11 +67,9 @@
     <Compile Include="DataService\Contratti\IContrattiDataService..cs" />
     <Compile Include="DataService\DataServiceBase.cs" />
     <Compile Include="DataService\Distinte\DistinteDataService.cs" />
-    <Compile Include="DataService\Distinte\DistinteDataServiceFactory.cs" />
     <Compile Include="DataService\Distinte\IDistinteDataService..cs" />
-    <Compile Include="DataService\User\IUserDataService.cs" />
-    <Compile Include="DataService\User\UserDataService.cs" />
-    <Compile Include="DataService\User\UserDataServiceFactory.cs" />
+    <Compile Include="DataService\User\IUsersDataService.cs" />
+    <Compile Include="DataService\User\UsersDataService.cs" />
     <Compile Include="Models\ContrattoBrowsed.cs" />
     <Compile Include="Models\DistintaBrowsed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

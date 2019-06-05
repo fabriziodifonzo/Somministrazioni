@@ -1,5 +1,6 @@
 ﻿using EasyMaticaSrl.Utilities.Cryptography;
 using EntityFramework.DbContextScope.Interfaces;
+using log4net;
 using Somministrazioni.Common.Constants;
 using Somministrazioni.Data.Reporitories.User;
 using System;
@@ -10,10 +11,13 @@ using System.Threading.Tasks;
 
 namespace Sommnistrazioni.Data.DataService.User
 {
-    public class UserDataService : DataServiceBase, IUserDataService
+    public class UsersDataService : DataServiceBase, IUsersDataService
     {
-        public UserDataService(IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
+        public UsersDataService(ILog log, IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
         {
+            CheckConstructorParameters(log, ambientDbContextLocator);
+
+            _log = log;
         }
 
         public bool TryAuthenticateUser(string userName, string password, out string idOperatore)
@@ -37,6 +41,20 @@ namespace Sommnistrazioni.Data.DataService.User
                 }
 
                 return verifyPassword;
+            }
+        }
+
+        ILog _log;
+
+        static void CheckConstructorParameters(ILog log, IAmbientDbContextLocator ambientDbContextLocator)
+        {
+            if (log == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(log));
+            }
+            if (ambientDbContextLocator == null)
+            {
+                throw new ArgumentException(GenericConstants.ERRMSG_NULLARGUMENT + GenericConstants.CHR_SPACE + nameof(ambientDbContextLocator));
             }
         }
 

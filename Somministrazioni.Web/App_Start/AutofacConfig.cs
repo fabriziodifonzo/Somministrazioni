@@ -18,6 +18,9 @@ using Sommnistrazioni.Data.DataService.Distinte;
 using Somministrazioni.Business.Components.Browsers.Distinte;
 using Somministrazioni.Business.Components.Browsers.Contratti;
 using Sommnistrazioni.Data.DataService.Contratti;
+using Somministrazioni.Data.DataService.Contratti;
+using Sommnistrazioni.Data.DataService.User;
+using Somministrazioni.Business.Components.Managers.Users;
 
 namespace Somministrazioni.Web.App_Start
 {
@@ -29,6 +32,10 @@ namespace Somministrazioni.Web.App_Start
 
             builder.RegisterModule(new AmbientDBContextLocatorModule());            
             builder.RegisterModule(new AutofacLoggingModule());
+
+            //Users
+            builder.RegisterModule(new UsersManagerModule());
+            builder.RegisterModule(new UsersDataServiceModule());
 
             //Distinte
             builder.RegisterModule(new DistinteBrowserModule());
@@ -54,6 +61,26 @@ namespace Somministrazioni.Web.App_Start
 
             // Set MVC DI resolver to use our Autofac container
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+
+        class UsersDataServiceModule : Autofac.Module
+        {
+            protected override void Load(ContainerBuilder builder)
+            {
+                builder.RegisterType<UsersDataService>()
+                    .AsImplementedInterfaces()
+                    .InstancePerRequest();
+            }
+        }
+
+        class UsersManagerModule : Autofac.Module
+        {
+            protected override void Load(ContainerBuilder builder)
+            {
+                builder.RegisterType<UsersManager>()
+                    .AsImplementedInterfaces()
+                    .InstancePerRequest();
+            }
         }
 
         class DistinteDataServiceModule : Autofac.Module
