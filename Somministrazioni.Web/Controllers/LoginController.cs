@@ -23,12 +23,8 @@ namespace Somministrazioni.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
             var loginPageModel = new LoginPageModel();
             _log.Info(WebConstants.INFOMSG_SHOWDATA);            
-
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(loginPageModel);
         }
@@ -41,8 +37,6 @@ namespace Somministrazioni.Web.Controllers
             {
                 CheckLoginParameters(userName, password);
 
-                _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
                 var authenticationRes = _businessFacade.TryAuthenticateUser(userName, password, out string idOperatore);
                 var actionInfo = ViewSelectorFactory.GetInstance(authenticationRes).SelectView();
 
@@ -51,8 +45,6 @@ namespace Somministrazioni.Web.Controllers
                     return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName, new LoginPageModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
                 }
                 PutInSession(this, idOperatore);
-
-                _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
                 return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName);
             }

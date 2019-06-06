@@ -17,13 +17,13 @@ namespace Somministrazioni.Web
         {
             log4net.Config.XmlConfigurator.Configure();
             DbInterception.Add(new LoggedEFInterceptor());
-
-            AutofacConfig.ConfigureContainer();
-
+            
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutofacConfig.ConfigureContainer();
         }
     }
 }
