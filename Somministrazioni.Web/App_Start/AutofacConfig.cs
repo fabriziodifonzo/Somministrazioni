@@ -62,7 +62,17 @@ namespace Somministrazioni.Web.App_Start
                                      )
                                 )
                     .AsActionFilterFor<Controller>()
-                    .InstancePerRequest();                
+                    .InstancePerRequest();
+
+            builder.RegisterType<LogExceptionFilterAttribute>()
+                    .WithParameter(new ResolvedParameter
+                                    (
+                                        (param, ctx) => param.ParameterType == typeof(ILog),
+                                        (param, ctx) => LogManager.GetLogger(param.Member.DeclaringType)
+                                     )
+                                )
+                    .AsExceptionFilterFor<Controller>()
+                    .InstancePerRequest();            
 
             // Register dependencies in filter attributes
             builder.RegisterFilterProvider();
