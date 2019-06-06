@@ -15,11 +15,7 @@ namespace Somministrazioni.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
             _log.Info(WebConstants.INFOMSG_SHOWDATA);
-
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
             return View();
         }

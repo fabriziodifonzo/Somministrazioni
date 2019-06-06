@@ -23,14 +23,10 @@ namespace Somministrazioni.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
             var contrattiPageModel = new ContrattiPageModel();
             var contrattiBrowsedPagedResult = _businessFacade.Contratti(contrattiPageModel.ToFilter());
             contrattiPageModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;
             _log.Info(WebConstants.INFOMSG_SHOWDATA);
-
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(contrattiPageModel);
         }
@@ -39,14 +35,10 @@ namespace Somministrazioni.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(ContrattiPageModel contrattiModel)
         {
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
             var contrattiBrowsedPagedResult = _businessFacade.Contratti(contrattiModel.ToFilter());
 
             contrattiModel.ListContrattiBrowsed = contrattiBrowsedPagedResult.ListContratti;
             _log.Info(WebConstants.INFOMSG_SHOWDATA);
-
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(contrattiModel);
         }

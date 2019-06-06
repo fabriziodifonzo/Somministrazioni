@@ -23,14 +23,9 @@ namespace Somministrazioni.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
-
             var distintePageModel = new DistintePageModel();
             var distinteBrowsedPagedResult = _businessFacade.Distinte(distintePageModel.ToFilter());
             distintePageModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
-
-
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_GET)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
 
             return View(distintePageModel);
         }
@@ -39,14 +34,11 @@ namespace Somministrazioni.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(DistintePageModel distinteModel)
         {
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_START));
 
             var distinteBrowsedPagedResult = _businessFacade.Distinte(distinteModel.ToFilter());
 
             distinteModel.ListDistintaBrowsed = distinteBrowsedPagedResult.ListDistinte;
-            _log.Info(WebConstants.INFOMSG_SHOWDATA);
-
-            _log.Info((new StringBuilder(WebConstants.HTTPMETHODTYPE_POST)).Append(GenericConstants.CHR_SPACE).Append(GenericConstants.METHOD_END));
+            _log.Info(WebConstants.INFOMSG_SHOWDATA);            
 
             return View(distinteModel);
         }
