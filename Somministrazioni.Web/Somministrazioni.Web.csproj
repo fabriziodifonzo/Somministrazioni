@@ -176,8 +176,10 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Filter\AuthenticationFilterAttribute.cs" />
+    <Compile Include="Filter\AuthenticationLoginFilterAttribute.cs" />
     <Compile Include="Filter\LogActionFilterAttribute.cs" />
-    <Compile Include="Filter\LogExceptionFilterAttribute.cs" />
+    <Compile Include="Filter\ExceptionHandlerFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,7 +213,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -232,6 +236,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Distinte\Index.cshtml" />
     <Content Include="Views\Contratti\Index.cshtml" />
+    <Content Include="Scripts\knockout-3.5.0.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

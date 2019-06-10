@@ -29,30 +29,35 @@ namespace Somministrazioni.Web.Controllers
             return View(loginPageModel);
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Index(LoginPageModel loginPageModel)
+        {
+            return Json(loginPageModel);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string userName, string password)
         {
-            try
+            CheckLoginParameters(userName, password);
+
+            var authenticationRes = _businessFacade.TryAuthenticateUser(userName, password, out string idOperatore);
+            var actionInfo = ViewSelectorFactory.GetInstance(authenticationRes).SelectView();
+
+            if (true)
             {
-                CheckLoginParameters(userName, password);
-
-                var authenticationRes = _businessFacade.TryAuthenticateUser(userName, password, out string idOperatore);
-                var actionInfo = ViewSelectorFactory.GetInstance(authenticationRes).SelectView();
-
-                if (authenticationRes == AUTHENTICATION_FALSE)
-                {
-                    return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName, new LoginPageModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
-                }
-                PutInSession(this, idOperatore);
-
-                return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName);
+                throw new Exception("PIPPO");
             }
-            catch (Exception e)
+
+            if (authenticationRes == AUTHENTICATION_FALSE)
             {
-                _log.Info(e);
-                return RedirectToAction(WebConstants.ACTIONNAME_ERROR_INDEX, WebConstants.CONTROLLERNAME_ERROR);
+                //return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName, new LoginPageModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
+                return Index(new LoginPageModel(GenericConstants.ERRMSG_INVALIDLOGIN, GenericConstants.HASPANELINFO_TRUE));
             }
+            PutInSession(this, idOperatore);
+
+            return RedirectToAction(actionInfo.ActionName, actionInfo.ControllerName);
         }
 
         readonly ILog _log;

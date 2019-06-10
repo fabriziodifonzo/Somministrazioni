@@ -21,6 +21,5 @@ namespace Somministrazioni.Web.Controllers
         }
 
         readonly ILog _log = log4net.LogManager.GetLogger(typeof(HomeController));
-
     }
 }

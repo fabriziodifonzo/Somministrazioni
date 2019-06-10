@@ -21,6 +21,11 @@ namespace Somministrazioni.Web.Constants
         public const string HTTPMETHODTYPE_GET = "GET";
         public const string HTTPMETHODTYPE_POST = "POST";
 
+        //--- Route Value Dictionary Keys ----
+
+        public const string ROUTEVALUEINDEXKEY_CONTROLLER = "Controller";
+        public const string ROUTEVALUEINDEXKEY_ACTION = "Action";
+
         //--- Controller Names ----
 
         public const string CONTROLLERNAME_APPLICATIONHOME = "Home";

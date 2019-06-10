@@ -14,6 +14,10 @@ namespace Somministrazioni.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                                 "~/Scripts/knockout-{version}.js"));
+
+
             // Utilizzare la versione di sviluppo di Modernizr per eseguire attività di sviluppo e formazione. Successivamente, quando si è
             // pronti per passare alla produzione, usare lo strumento di compilazione disponibile all'indirizzo https://modernizr.com per selezionare solo i test necessari.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

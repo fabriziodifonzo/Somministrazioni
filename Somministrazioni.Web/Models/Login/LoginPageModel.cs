@@ -13,9 +13,9 @@ namespace Somministrazioni.Web.Models.Login
 
         public LoginPageModel(string message , bool hasInfoPanel) : base (hasInfoPanel)
         {
-            Message = message ?? throw new ArgumentNullException(nameof(message));
+            InfoMessage = message ?? throw new ArgumentNullException(nameof(message));
         }
 
-        public string Message { get; set; }
+        public string InfoMessage { get; set; }
     }
 }

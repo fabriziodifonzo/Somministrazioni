@@ -4,17 +4,51 @@
     Layout = "~/Views/Shared/LoginLayout.cshtml";
 }
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post))
-{
+<script type="text/javascript">
+
+    var loginlUrl = '@Url.Action("Login","Login")';
+    var errorUrl = '@Url.Action("Index","Error")';
+
+    var loginPageModel = @Html.Raw(Json.Encode(Model));
+    ko.applyBindings(loginPageModel);
+
+
+    $(document).ready(function () {
+
+        function LoginPageViewModel(loginPageModel) {
+            var self = this;
+
+            self.message = loginPageModel.InfoMessage;
+            self.hasInfoMsg = loginPageModel.HasPanelInfo;
+        }
+
+        $("#loginFormID").submit(function (e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: loginlUrl,
+                data: form.serialize(),
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (request, error) {
+                    window.location = errorUrl;
+                },
+            });
+        });
+    });
+
+</script>
+
+<<form id="loginFormID">
     @Html.AntiForgeryToken();
     <label>Enter the Username</label>
     <input type="text" name="username" />
     <label>Enter the Password</label>
     <input type="password" name="password" />
     <input type="submit" value="Login" name="submit" class="submit" />
-    <div id="infoPanel">
-        <p>@Model.Message</p>
-    </div>
-}
-
-
+ </form>
