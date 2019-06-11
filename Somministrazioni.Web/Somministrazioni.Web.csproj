@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Filter\AuthenticationFilterAttribute.cs" />
     <Compile Include="Filter\AuthenticationLoginFilterAttribute.cs" />
     <Compile Include="Filter\LogActionFilterAttribute.cs" />
@@ -239,6 +240,7 @@
     <Content Include="Views\Distinte\Index.cshtml" />
     <Content Include="Views\Contratti\Index.cshtml" />
     <Content Include="Scripts\knockout-3.5.0.js" />
+    <Content Include="Views\Logout\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
