@@ -8,6 +8,11 @@ namespace Somministrazioni.Common.Constants
 {
     public static class GenericConstants
     {
+        //---- Error Codes -------
+
+        public const int ERRCODE_OK = 0;
+        public const int ERRCODE_INVALIDLOGIN = 1;
+
         //---- Error Messages ----
 
         public const string ERRMSG_NULLARGUMENT = "The following argument must not be null ";

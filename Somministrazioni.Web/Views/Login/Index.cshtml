@@ -8,43 +8,11 @@
 
     var loginlUrl = '@Url.Action("Login","Login")';
     var errorUrl = '@Url.Action("Index","Error")';
+    var homeUrl = '@Url.Action("Index","Home")';
 
-    var loginPageModel = @Html.Raw(Json.Encode(Model));
-    ko.applyBindings(loginPageModel);
+ </script>
 
-
-    $(document).ready(function () {
-
-        function LoginPageViewModel(loginPageModel) {
-            var self = this;
-
-            self.message = loginPageModel.InfoMessage;
-            self.hasInfoMsg = loginPageModel.HasPanelInfo;
-        }
-
-        $("#loginFormID").submit(function (e) {
-
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-
-            var form = $(this);
-
-            $.ajax({
-                type: "POST",
-                url: loginlUrl,
-                data: form.serialize(),
-                success: function (data) {
-                    alert(data);
-                },
-                error: function (request, error) {
-                    window.location = errorUrl;
-                },
-            });
-        });
-    });
-
-</script>
-
-<<form id="loginFormID">
+<form id="loginFormID">
     @Html.AntiForgeryToken();
     <label>Enter the Username</label>
     <input type="text" name="username" />
@@ -52,3 +20,6 @@
     <input type="password" name="password" />
     <input type="submit" value="Login" name="submit" class="submit" />
  </form>
+<div id="infoPanel">
+    <p></p>
+</div>

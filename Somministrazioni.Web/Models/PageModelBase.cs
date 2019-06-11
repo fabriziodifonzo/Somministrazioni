@@ -1,4 +1,5 @@
 ﻿using EasyMaticaSrl.Utilities.Helpers;
+using Somministrazioni.Common.Constants;
 using Somministrazioni.Web.Constants;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,35 @@ namespace Somministrazioni.Web.Models
 {
     public abstract class PageModelBase
     {
-        protected PageModelBase(bool hasPanelInfo)
+        protected PageModelBase(int errorCode, string errorMsg)
         {
-            _hasPanelInfo = hasPanelInfo;
+            _initBase();
+            _errorCode = errorCode;
+            _errorMsg = errorMsg;
         }
 
         protected PageModelBase()
         {
-            _sortBy = string.Empty;
-            _sortDirection = string.Empty;
-            PageSize = WebConstants.PAGESISZE_DEFAULT;
-            CurrentPageNumb = WebConstants.PAGENUMB_DEFAULT;
+            _initBase();
+            _errorCode = GenericConstants.ERRCODE_OK;
+            _errorMsg = string.Empty;
         }
 
-        public bool HasPanelInfo
+        public int ErrorCode
         {
             get 
             {
-                return _hasPanelInfo;
+                return _errorCode;
             }
         }
+
+        public string ErrorMsg
+        {
+            get
+            {
+                return _errorMsg;
+            }
+        }        
 
         public string SortBy
         {
@@ -65,8 +75,17 @@ namespace Somministrazioni.Web.Models
             get; set;
         }
 
+        void _initBase()
+        {
+            _sortBy = string.Empty;
+            _sortDirection = string.Empty;
+            PageSize = WebConstants.PAGESISZE_DEFAULT;
+            CurrentPageNumb = WebConstants.PAGENUMB_DEFAULT;
+        }
+
         string _sortBy;
         string _sortDirection;
-        readonly protected bool _hasPanelInfo;
+        readonly protected int _errorCode;
+        readonly protected string _errorMsg;
     }
 }

@@ -29,6 +29,14 @@ namespace Somministrazioni.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            RegisterPageBundles(bundles);
+        }
+
+        private static void RegisterPageBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/scripts/pages/constants").Include("~/Scripts/Pages/Common/Constants.js"));
+            bundles.Add(new ScriptBundle("~/scripts/pages/login").Include("~/Scripts/Pages/Login/Login.js"));
         }
     }
 }

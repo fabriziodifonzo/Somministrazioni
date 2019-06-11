@@ -14,9 +14,8 @@ namespace Somministrazioni.Web.Models.Distinte
         {
         }
 
-        public DistintePageModel(string message, bool hasInfoPanel) : base(hasInfoPanel)
+        public DistintePageModel(int errorCode, string errorMessage) : base(errorCode, errorMessage)
         {
-            Message = message ?? throw new ArgumentNullException(nameof(message));
         }
 
         public IList<DistintaBrowsed> ListDistintaBrowsed
@@ -37,9 +36,7 @@ namespace Somministrazioni.Web.Models.Distinte
         public string Field2
         {
             get; set;
-        }
-
-        public string Message { get; set; }
+        } 
 
         public DistintaFilter ToFilter()
         {

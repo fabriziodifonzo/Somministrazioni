@@ -1,0 +1,1 @@
+﻿var ERRCODE_INVALIDLOGIN = 1;

@@ -14,9 +14,9 @@ namespace Somministrazioni.Web.Models.Contratti
         {
         }
 
-        public ContrattiPageModel(string message, bool hasInfoPanel) : base(hasInfoPanel)
+        public ContrattiPageModel(int errorCode, string errorMessage) : base(errorCode, errorMessage)
         {
-            Message = message ?? throw new ArgumentNullException(nameof(message));
+
         }
 
         public IList<ContrattoBrowsed> ListContrattiBrowsed

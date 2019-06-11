@@ -11,11 +11,11 @@ namespace Somministrazioni.Web.Models.Login
         {
         }
 
-        public LoginPageModel(string message , bool hasInfoPanel) : base (hasInfoPanel)
+        public LoginPageModel(bool authenticationOk, int errorCode, string errorMessage) : base (errorCode, errorMessage)
         {
-            InfoMessage = message ?? throw new ArgumentNullException(nameof(message));
+            AuthenticationOk = authenticationOk;
         }
 
-        public string InfoMessage { get; set; }
+        public bool AuthenticationOk { get; set; }
     }
 }
