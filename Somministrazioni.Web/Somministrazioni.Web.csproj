@@ -178,7 +178,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Filter\AuthenticationFilterAttribute.cs" />
-    <Compile Include="Filter\AuthenticationLoginFilterAttribute.cs" />
     <Compile Include="Filter\LogActionFilterAttribute.cs" />
     <Compile Include="Filter\ExceptionHandlerFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">

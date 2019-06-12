@@ -12,9 +12,19 @@ namespace Somministrazioni.Web.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            Session[WebConstants.SESSIONNAME_IDOPERATORE] = null;
+            Session.Clear();  //Clears session data.
+            Session.Abandon(); //Triggers the Session_OnEnd event.
+            _clearSessionIDCookie();  //Destroy client side session.
 
             return View();
+        }
+
+        private void _clearSessionIDCookie()
+        {
+            var httpCookie = new HttpCookie(WebConstants.COOKIE_SESSIONID, string.Empty);
+            httpCookie.HttpOnly = true;
+
+            HttpContext.Response.Cookies.Add(httpCookie);
         }
     }
 }

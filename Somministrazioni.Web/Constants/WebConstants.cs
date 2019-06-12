@@ -46,5 +46,8 @@ namespace Somministrazioni.Web.Constants
 
         public const string SESSIONNAME_IDOPERATORE = "idoperatore";
 
+        //---- Coockies -------
+
+        public const string COOKIE_SESSIONID = "ASP.NET_SessionId";
     }
 }

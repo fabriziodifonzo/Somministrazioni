@@ -74,16 +74,6 @@ namespace Somministrazioni.Web.App_Start
                     .AsExceptionFilterFor<Controller>()
                     .InstancePerRequest();
 
-            builder.RegisterType<AuthenticationLoginFilterAttribute>()
-                    .WithParameter(new ResolvedParameter
-                                    (
-                                        (param, ctx) => param.ParameterType == typeof(ILog),
-                                        (param, ctx) => LogManager.GetLogger(param.Member.DeclaringType)
-                                     )
-                                )
-                    .AsAuthenticationFilterFor<LoginController>()
-                    .InstancePerRequest();
-
             builder.RegisterType<AuthenticationFilterAttribute>()
                     .WithParameter(new ResolvedParameter
                                     (

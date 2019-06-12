@@ -1,4 +1,5 @@
-﻿using Somministrazioni.Common.Constants;
+﻿using Helper;
+using Somministrazioni.Common.Constants;
 using Somministrazioni.Web.Constants;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Somministrazioni.Web.Filter
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {            
-            if (filterContext.HttpContext.Session[WebConstants.SESSIONNAME_IDOPERATORE] == null)
+            if (!SessionHelper.IsUserAuthenticated(filterContext.HttpContext.Session[WebConstants.SESSIONNAME_IDOPERATORE]))
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
